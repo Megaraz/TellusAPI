@@ -90,3 +90,23 @@ as begin
 end
 go
 
+create procedure UpdateKund
+	(
+		@ID int,
+		@Personnr varchar(13),
+		@Förnamn varchar(32),
+		@Efternamn varchar(32)
+	)
+as
+begin
+	update
+		Kunder
+	set
+		Personnr = @Personnr,
+		Förnamn = @Förnamn,
+		Efternamn = @Efternamn
+	where
+		Kunder.ID = @ID
+end
+go
+		

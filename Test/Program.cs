@@ -9,13 +9,28 @@ internal class Program
 
         KundRepository kundRepository = new KundRepository(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
-        Kund kund = new Kund
-            (
-                "19910410-5235",
-                "Rasmus",
-                "Läckberg"
-            );
+        //Kund kund = new Kund
+        //    (
+        //        "19910410-5235",
+        //        "Rasmus",
+        //        "Läckberg"
+        //    );
 
-        kundRepository.AddKund(kund);
+        //kundRepository.AddKund(kund);
+
+
+
+        if (kundRepository.GetKundByID(1002) != null)
+        {
+            Kund? kund = kundRepository.GetKundByID(1002);
+
+            Console.WriteLine(kund.Förnamn);
+        }
+
+        else
+            Console.WriteLine("EMPTY");
+
+
+
     }
 }
