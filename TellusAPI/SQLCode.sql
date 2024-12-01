@@ -71,3 +71,24 @@ create table Produkter2Order
 	unique(ProdukterID, [OrderID])
 )
 go
+
+
+create procedure AddKund
+	(
+		@Personnr varchar(13),
+		@Förnamn varchar(32),
+		@Efternamn varchar(32),
+
+		@ID int output
+	)
+as begin
+	insert into
+		Kunder
+	values
+		(@Personnr, @Förnamn, @Efternamn)
+
+	set
+		@ID = SCOPE_IDENTITY();
+end
+go
+

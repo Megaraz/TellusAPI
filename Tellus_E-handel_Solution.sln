@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TellusAPI", "TellusAPI\TellusAPI.csproj", "{4EE984D3-55D6-487B-B86B-B58109ED08A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{66F2CC3B-9870-4B0F-A35C-14F6A4CB52C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4EE984D3-55D6-487B-B86B-B58109ED08A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EE984D3-55D6-487B-B86B-B58109ED08A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EE984D3-55D6-487B-B86B-B58109ED08A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66F2CC3B-9870-4B0F-A35C-14F6A4CB52C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66F2CC3B-9870-4B0F-A35C-14F6A4CB52C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66F2CC3B-9870-4B0F-A35C-14F6A4CB52C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66F2CC3B-9870-4B0F-A35C-14F6A4CB52C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
