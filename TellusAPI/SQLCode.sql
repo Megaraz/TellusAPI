@@ -14,9 +14,7 @@ create table Kunder
 	ID int identity(1001, 1) primary key,
 	Personnr nvarchar(13) null,
 	Förnamn nvarchar(32) not null, 
-	Efternamn nvarchar(32) not null,
-	Födelseår int not null
-
+	Efternamn nvarchar(32) not null
 )
 go
 
@@ -32,7 +30,7 @@ go
 create table Kund2Kontakt
 (
 	ID int identity primary key,
-	KunderID int not null references Kunder(ID) ,
+	KunderID int not null references Kunder(ID),
 	KontaktuppgifterID int not null references Kontaktuppgifter(ID),
 	unique(KunderID, KontaktuppgifterID)
 )
