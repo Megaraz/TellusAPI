@@ -1,8 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
 using System.IO.Pipes;
+using TellusAPI;
 
-namespace TellusAPI
+namespace Models
 {
     public class Tellus
     {
