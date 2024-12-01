@@ -90,3 +90,4 @@ as begin
 end
 go
 
+select * from Kunder

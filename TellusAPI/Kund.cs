@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TellusAPI;
+namespace Models;
 public class Kund
 {
     public Kund(string personnr, string förnamn, string efternamn, int iD = -1)
