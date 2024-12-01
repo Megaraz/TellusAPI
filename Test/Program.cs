@@ -1,4 +1,5 @@
 ﻿using Models;
+using Repositories;
 namespace Test;
 
 internal class Program
@@ -6,7 +7,7 @@ internal class Program
     static void Main(string[] args)
     {
 
-        Tellus tellus = new Tellus(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        KundRepository kundRepository = new KundRepository(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
         Kund kund = new Kund
             (
@@ -15,6 +16,6 @@ internal class Program
                 "Läckberg"
             );
 
-        tellus.AddKund(kund);
+        kundRepository.AddKund(kund);
     }
 }

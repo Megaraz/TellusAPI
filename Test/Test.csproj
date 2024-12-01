@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TellusAPI\Repositories\Repositories.csproj" />
     <ProjectReference Include="..\TellusAPI\Models.csproj" />
   </ItemGroup>
 
