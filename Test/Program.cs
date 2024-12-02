@@ -20,11 +20,11 @@ internal class Program
 
 
 
-        if (kundRepository.GetKundByID(1002) != null)
+        if (kundRepository.GetKundByID(1001) != null)
         {
-            Kund? kund = kundRepository.GetKundByID(1002);
+            Kund? kund = kundRepository.GetKundByID(1001);
 
-            Console.WriteLine(kund.Förnamn);
+            Console.WriteLine(kund);
         }
 
         else

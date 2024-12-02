@@ -19,4 +19,9 @@ public class Kund
     public string Personnr { get; set; } = string.Empty;
     public string Förnamn { get; set; } = string.Empty;
     public string Efternamn { get; set; } = string.Empty;
+
+    public override string ToString()
+    {
+        return $"{ID}   {Personnr}, {Förnamn} {Efternamn}";
+    }
 }
