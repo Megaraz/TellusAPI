@@ -22,6 +22,6 @@ public class Kund
 
     public override string ToString()
     {
-        return $"{ID}   {Personnr}, {Förnamn} {Efternamn}";
+        return $"ID: {ID}{Environment.NewLine}Personnr: {Personnr}{Environment.NewLine}Förnamn: {Förnamn}{Environment.NewLine}Efternamn: {Efternamn}";
     }
 }

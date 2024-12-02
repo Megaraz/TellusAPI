@@ -14,9 +14,29 @@ create table Kunder
 	ID int identity(1001, 1) primary key,
 	Personnr nvarchar(13) null,
 	Förnamn nvarchar(32) not null, 
-	Efternamn nvarchar(32) not null
+	Efternamn nvarchar(32) not null,
+	unique(Personnr, Förnamn, Efternamn)
 )
 go
+
+create table Adresser
+(
+	ID int identity primary key,
+	Gatuadress nvarchar(32) not null,
+	Ort nvarchar(32) not null,
+	Postnr nvarchar(6) not null,
+	[Lgh nummer] nvarchar(4) null
+)
+
+create table Kund2Adress
+(
+	ID int identity primary key,
+	KunderID int not null references Kunder(ID) on delete cascade,
+	AdresserID int not null references Adresser(ID) on delete cascade,
+	unique(KunderID, AdresserID)
+)
+
+
 
 create table Kontaktuppgifter
 (
@@ -30,8 +50,8 @@ go
 create table Kund2Kontakt
 (
 	ID int identity primary key,
-	KunderID int not null references Kunder(ID),
-	KontaktuppgifterID int not null references Kontaktuppgifter(ID),
+	KunderID int not null references Kunder(ID) on delete cascade,
+	KontaktuppgifterID int not null references Kontaktuppgifter(ID) on delete cascade,
 	unique(KunderID, KontaktuppgifterID)
 )
 go
@@ -109,4 +129,18 @@ begin
 		Kunder.ID = @ID
 end
 go
-		
+
+create procedure CascadeDeleteKund(@ID int)
+as
+	begin
+		delete
+			from
+				Kunder
+			where
+				ID = @ID
+	end
+go
+
+
+
+
