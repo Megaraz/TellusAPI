@@ -8,7 +8,6 @@ internal class Program
     {
 
         KundRepository kundRepository = new KundRepository(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        
 
         string personnr = "19940410-5235";
         string förnamn = "Rasmus";
@@ -17,30 +16,47 @@ internal class Program
         Kund kund = new Kund(personnr, förnamn, efternamn);
 
 
-        // Test för att lägga till ny kund, fyll i fält ovanför.
-        Test_AddKund(kundRepository, kund);
+
+        #region KUND CRUD TESTER
+        //// (CREATE)Test för att lägga till ny kund, fyll i fält ovanför.
+        //Test_AddKund(kundRepository, kund);
 
 
-        //// Test för att hämta kund by ID
+        //// (READ) Test för att hämta kund by ID
         //Test_GetKundByID(kundRepository, 1001);
 
 
-        //// Test för att updatera kund
-        //kundRepository.UpdateKund(kund);
-
-
-        //// Test för att hämta samtliga kunder
+        //// (READ) Test för att hämta samtliga kunder
         //foreach (var item in kundRepository.GetKunder()!)
         //{
         //    Console.WriteLine(item);
         //}
 
 
+        //// (UPDATE) Test för att updatera kund
+        //kundRepository.UpdateKund(kund);
 
 
+        // (DELETE)Test för att deletea kund
+        //Test_DeleteKundByID(kundRepository, 1024);
+        #endregion
 
+    }
 
+    private static void Test_DeleteKundByID(KundRepository kundRepository, int id)
+    {
+        Kund? kund;
 
+        if (kundRepository.GetKundByID(id) != null)
+        {
+            kund = kundRepository.GetKundByID(id);
+            Console.WriteLine($"{kund}\n\nKunden har deletats från databasen");
+
+            kundRepository.CascadingDeleteKundByID(id);
+
+        }
+        else
+            Console.WriteLine("Ingen kund i databas med detta ID");
     }
 
     private static void Test_GetKundByID(KundRepository kundRepository, int id)
