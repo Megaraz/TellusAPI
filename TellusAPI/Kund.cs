@@ -9,10 +9,15 @@ public class Kund
 {
     public Kund(string personnr, string förnamn, string efternamn, int iD = -1)
     {
+        ID = iD;
         Personnr = personnr ?? throw new ArgumentNullException(nameof(personnr));
         Förnamn = förnamn ?? throw new ArgumentNullException(nameof(förnamn));
         Efternamn = efternamn ?? throw new ArgumentNullException(nameof(efternamn));
-        ID = iD;
+    }
+
+    public Kund()
+    {
+
     }
 
     public int ID { get; set; }

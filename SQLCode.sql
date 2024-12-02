@@ -12,7 +12,7 @@ go
 create table Kunder
 (
 	ID int identity(1001, 1) primary key,
-	Personnr nvarchar(13) null,
+	Personnr nvarchar(13) not null,
 	Förnamn nvarchar(32) not null, 
 	Efternamn nvarchar(32) not null,
 	unique(Personnr, Förnamn, Efternamn)

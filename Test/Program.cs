@@ -22,8 +22,8 @@ internal class Program
         //Test_AddKund(kundRepository, kund);
 
 
-        //// (READ) Test för att hämta kund by ID
-        //Test_GetKundByID(kundRepository, 1001);
+        // (READ) Test för att hämta kund by ID
+        Test_GetKundByID(kundRepository, 1025);
 
 
         //// (READ) Test för att hämta samtliga kunder
@@ -43,21 +43,21 @@ internal class Program
 
     }
 
-    private static void Test_DeleteKundByID(KundRepository kundRepository, int id)
-    {
-        Kund? kund;
+    //private static void Test_DeleteKundByID(KundRepository kundRepository, int id)
+    //{
+    //    Kund? kund;
 
-        if (kundRepository.GetKundByID(id) != null)
-        {
-            kund = kundRepository.GetKundByID(id);
-            Console.WriteLine($"{kund}\n\nKunden har deletats från databasen");
+    //    if (kundRepository.GetKundByID(id) != null)
+    //    {
+    //        kund = kundRepository.GetKundByID(id);
+    //        Console.WriteLine($"{kund}\n\nKunden har deletats från databasen");
 
-            kundRepository.CascadingDeleteKundByID(id);
+    //        kundRepository.DeleteKundByID(id);
 
-        }
-        else
-            Console.WriteLine("Ingen kund i databas med detta ID");
-    }
+    //    }
+    //    else
+    //        Console.WriteLine("Ingen kund i databas med detta ID");
+    //}
 
     private static void Test_GetKundByID(KundRepository kundRepository, int id)
     {
@@ -71,9 +71,9 @@ internal class Program
             Console.WriteLine("Ingen kund i databas med detta ID");
     }
 
-    private static void Test_AddKund(KundRepository kundRepository, Kund kund)
-    {
-        kundRepository.AddKund(kund);
-        Console.WriteLine($"{kund}\n\nKunden har lagts till i databasen");
-    }
+    //private static void Test_AddKund(KundRepository kundRepository, Kund kund)
+    //{
+    //    kundRepository.AddKund(kund);
+    //    Console.WriteLine($"{kund}\n\nKunden har lagts till i databasen");
+    //}
 }
