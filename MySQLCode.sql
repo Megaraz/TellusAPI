@@ -1,4 +1,6 @@
 select * from Kunder
+order by
+	ID 
 go
 
 drop table Kunder
