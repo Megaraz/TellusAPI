@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
-internal class Kontaktuppgift
+public class Kontaktuppgift
 {
     public Kontaktuppgift(string kontakttyp, string kontaktvärde, int id = -1)
     {

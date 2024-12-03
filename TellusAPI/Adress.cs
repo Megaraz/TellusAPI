@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
-internal class Adress
+public class Adress
 {
     public Adress(string gatuadress, string ort, string postnr, string? lghNummer = null, int id = -1)
     {

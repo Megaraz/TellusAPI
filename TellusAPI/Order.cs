@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
-internal class Order
+public class Order
 {
     public Order(int ordernr, bool ärSkickad, bool ärLevererad, bool ärBetald, DateTime tidVidBeställning, DateTime beräknadLeverans, int kund2KontaktID, string? betalsystem = null, int id = -1)
     {

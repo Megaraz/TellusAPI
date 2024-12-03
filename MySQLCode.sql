@@ -28,3 +28,196 @@ VALUES
 GO
 
 
+create procedure AddAdress
+(
+    @Gatuadress nvarchar(32),
+    @Ort nvarchar(32),
+    @Postnr nvarchar(6),
+    @LghNummer nvarchar(4),
+    @ID int output
+)
+as
+begin
+    insert into 
+        Adresser (Gatuadress, Ort, Postnr, [Lgh nummer])
+    values 
+        (@Gatuadress, @Ort, @Postnr, @LghNummer);
+
+    set 
+        @ID = SCOPE_IDENTITY();
+end
+go
+
+
+create procedure UpdateAdress
+(
+    @ID int,
+    @Gatuadress nvarchar(32),
+    @Ort nvarchar(32),
+    @Postnr nvarchar(6),
+    @LghNummer nvarchar(4)
+)
+as
+begin
+    update 
+        Adresser
+    set 
+        Gatuadress = @Gatuadress,
+        Ort = @Ort,
+        Postnr = @Postnr,
+        [Lgh nummer] = @LghNummer
+    where 
+        ID = @ID;
+end
+go
+
+create procedure CascadeDeleteAdress
+(
+    @ID int
+)
+as
+begin
+    delete from 
+        Adresser
+    where 
+        ID = @ID;
+end
+go
+
+alter procedure AddKontaktuppgift
+(
+    @Kontakttyp nvarchar(16),
+    @Kontaktvärde nvarchar(64),
+    @ID int output
+)
+as
+begin
+    insert into 
+        Kontaktuppgifter (Kontakttyp, Kontaktvärde)
+    values 
+        (@Kontakttyp, @Kontaktvärde);
+
+    set 
+        @ID = SCOPE_IDENTITY();
+end
+go
+
+alter procedure UpdateKontaktuppgift
+(
+    @ID int,
+    @Kontakttyp nvarchar(16),
+    @Kontaktvärde nvarchar(64)
+)
+as
+begin
+    update 
+        Kontaktuppgifter
+    set 
+        Kontakttyp = @Kontakttyp,
+        Kontaktvärde = @Kontaktvärde
+    where 
+        ID = @ID;
+end
+go
+
+alter procedure CascadeDeleteKontaktuppgift
+(
+    @ID int
+)
+as
+begin
+    delete from 
+        Kontaktuppgifter
+    where 
+        ID = @ID;
+end
+go
+
+create procedure AddOrder
+(
+    @Ordernr int,
+    @ÄrSkickad bit,
+    @ÄrLevererad bit,
+    @ÄrBetald bit,
+    @Betalsystem nvarchar(32),
+    @TidVidBeställning datetime,
+    @BeräknadLeverans datetime,
+    @Kund2KontaktID int,
+    @ID int output
+)
+as
+begin
+    insert into 
+        [Order] 
+        (
+            Ordernr, 
+            ÄrSkickad, 
+            ÄrLevererad, 
+            ÄrBetald, 
+            Betalsystem, 
+            TidVidBeställning, 
+            BeräknadLeverans, 
+            Kund2KontaktID
+        )
+    values 
+        (
+            @Ordernr, 
+            @ÄrSkickad, 
+            @ÄrLevererad, 
+            @ÄrBetald, 
+            @Betalsystem, 
+            @TidVidBeställning, 
+            @BeräknadLeverans, 
+            @Kund2KontaktID
+        );
+
+    set 
+        @ID = SCOPE_IDENTITY();
+end
+go
+
+create procedure UpdateOrder
+(
+    @ID int,
+    @Ordernr int,
+    @ÄrSkickad bit,
+    @ÄrLevererad bit,
+    @ÄrBetald bit,
+    @Betalsystem nvarchar(32),
+    @TidVidBeställning datetime,
+    @BeräknadLeverans datetime,
+    @Kund2KontaktID int
+)
+as
+begin
+    update 
+        [Order]
+    set 
+        Ordernr = @Ordernr,
+        ÄrSkickad = @ÄrSkickad,
+        ÄrLevererad = @ÄrLevererad,
+        ÄrBetald = @ÄrBetald,
+        Betalsystem = @Betalsystem,
+        TidVidBeställning = @TidVidBeställning,
+        BeräknadLeverans = @BeräknadLeverans,
+        Kund2KontaktID = @Kund2KontaktID
+    where 
+        ID = @ID;
+end
+go
+
+create procedure CascadeDeleteOrder
+(
+    @ID int
+)
+as
+begin
+    delete from 
+        [Order]
+    where 
+        ID = @ID;
+end
+go
+
+
+

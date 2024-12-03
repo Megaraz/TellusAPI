@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
-internal class Produkt
+public class Produkt
 {
     public Produkt(string produktnamn, string produktNummer, decimal pris, string? produktTyp = null, int id = -1)
     {
