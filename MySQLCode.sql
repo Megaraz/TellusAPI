@@ -219,5 +219,39 @@ begin
 end
 go
 
+use Tellus
+
+select 
+    * 
+from 
+    Adresser
+go
+
+select
+    *
+from
+    Kunder
+
+insert into
+    Kund2Adress(KunderID, AdresserID)
+values
+    (1025, 2)
+go
+
+select
+    a.*,
+    k.Förnamn
+from
+    Adresser as a
+join 
+    Kund2Adress as k2a on 
+    A.ID = k2a.AdresserID
+join
+    Kunder as k on
+    k2a.KunderID = k.ID
+where
+    k.id = 1025;
+    
+
 
 

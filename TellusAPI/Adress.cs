@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azure.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ public class Adress
 
     }
 
-    public int ID { get; set; }
+    public int ID { get; set; } = -1;
     public string Gatuadress { get; set; } = string.Empty;
     public string Ort { get; set; } = string.Empty;
     public string Postnr { get; set; } = string.Empty;

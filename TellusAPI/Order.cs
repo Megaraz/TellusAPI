@@ -25,7 +25,7 @@ public class Order
 
     }
 
-    public int ID { get; set; }
+    public int ID { get; set; } = -1;
     public int Ordernr { get; set; }
     public bool ÄrSkickad { get; set; }
     public bool ÄrLevererad { get; set; }

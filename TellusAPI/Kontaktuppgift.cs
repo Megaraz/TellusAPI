@@ -19,7 +19,7 @@ public class Kontaktuppgift
 
     }
 
-    public int ID { get; set; }
+    public int ID { get; set; } = -1;
     public string Kontakttyp { get; set; } = string.Empty;
     public string Kontaktvärde { get; set; } = string.Empty;
 

@@ -13,13 +13,23 @@ static class TEST_KUND
     public static void UpdateKund(KundRepository kundRepository, Kund kund)
     {
         kundRepository.UpdateKund(kund);
+        Console.WriteLine($"Kunden har uppdaterats:\n{kund}");
     }
 
     public static void GetKunder(KundRepository kundRepository)
     {
-        foreach (var item in kundRepository.GetKunder()!)
+        var kunder = kundRepository.GetKunder();
+
+        if (kunder != null && kunder.Count > 0)
         {
-            Console.WriteLine(item);
+            foreach (var item in kunder)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Inga kunder hittades i databasen");
         }
     }
 
@@ -35,19 +45,21 @@ static class TEST_KUND
 
         }
         else
-            Console.WriteLine("Ingen kund i databas med detta ID");
+            Console.WriteLine("Ingen kund i databasen med detta ID");
     }
 
     public static void GetKundByID(KundRepository kundRepository, int id)
     {
-        if (kundRepository.GetKundByID(id) != null)
+        Kund? kund = kundRepository.GetKundByID(id);
+        
+
+        if (kund != null)
         {
-            Kund? kund = kundRepository.GetKundByID(id);
 
             Console.WriteLine(kund);
         }
         else
-            Console.WriteLine("Ingen kund i databas med detta ID");
+            Console.WriteLine("Ingen kund i databasen med detta ID");
     }
 
     public static void AddKund(KundRepository kundRepository, Kund kund)

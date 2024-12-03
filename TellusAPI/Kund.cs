@@ -20,7 +20,7 @@ public class Kund
 
     }
 
-    public int ID { get; set; }
+    public int ID { get; set; } = -1;
     public string Personnr { get; set; } = string.Empty;
     public string Förnamn { get; set; } = string.Empty;
     public string Efternamn { get; set; } = string.Empty;

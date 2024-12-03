@@ -21,7 +21,7 @@ public class Produkt
 
     }
 
-    public int ID { get; set; }
+    public int ID { get; set; } = -1;
     public string Produktnamn { get; set; } = string.Empty;
     public string ProduktNummer { get; set; } = string.Empty;
     public decimal Pris { get; set; }
