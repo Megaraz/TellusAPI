@@ -10,6 +10,10 @@ internal class Program
         // Fyll i egen connectionstring här.
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
+        
+        // Regioner nedan innehåller metoder och data för att testa, avkommentera det man vill testa.
+
+
         #region KUND CRUD TESTER
 
         //KundRepository kundRepository = new KundRepository(_connectionString);
