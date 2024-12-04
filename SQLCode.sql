@@ -503,6 +503,7 @@ begin
 end
 go
 
+-- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
 create procedure CascadeDeleteProdukt
 (
     @ID int

@@ -1,4 +1,4 @@
-drop table Tellus
+drop database Tellus
 go
 
 select * from Kunder

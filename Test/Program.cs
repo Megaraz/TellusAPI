@@ -32,7 +32,7 @@ internal class Program
 
 
         //// (READ) Test för att hämta kund by ID
-        //TEST_KUND.GetKundByID(kundRepository, 1011);
+        //TEST_KUND.GetKundByID(kundRepository, 1009);
 
 
         //// (READ) Test för att hämta samtliga kunder
@@ -44,7 +44,7 @@ internal class Program
 
 
         //// (DELETE)Test för att deletea kund
-        //TEST_KUND.DeleteKundByID(kundRepository, 1011);
+        //TEST_KUND.DeleteKundByID(kundRepository, 1009);
         #endregion
 
         #region KONTAKTUPPGIFT CRUD TESTER
@@ -70,7 +70,7 @@ internal class Program
         //TEST_KONTAKTUPPGIFT.UpdateKontaktuppgift(kontaktuppgiftRepository, kontaktuppgift);
 
         //// (DELETE) Test för att deletea en Kontaktuppgift
-        //TEST_KONTAKTUPPGIFT.DeleteKontaktuppgiftByID(kontaktuppgiftRepository, 12);
+        //TEST_KONTAKTUPPGIFT.DeleteKontaktuppgiftByID(kontaktuppgiftRepository, 5);
 
         #endregion
 
@@ -99,7 +99,7 @@ internal class Program
         //TEST_ADRESS.UpdateAdress(adressRepository, adress);
 
         //// (DELETE) Test för att deletea en Adress
-        //TEST_ADRESS.DeleteAdressByID(adressRepository, 11);
+        //TEST_ADRESS.DeleteAdressByID(adressRepository, 7);
 
         #endregion
 
@@ -161,7 +161,7 @@ internal class Program
         //TEST_PRODUKT.UpdateProdukt(produktRepository, produkt);
 
         //// (DELETE) Test för att deletea en Produkt
-        //TEST_PRODUKT.DeleteProduktByID(produktRepository, 11);
+        //TEST_PRODUKT.DeleteProduktByID(produktRepository, 5);
 
         #endregion
 
