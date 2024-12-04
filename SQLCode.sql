@@ -695,7 +695,102 @@ begin
 end
 go
 
-    
+create procedure AddKund2Kontakt
+(
+    @KundID int,
+    @KontaktuppgiftID int,
+    @ID int output
+)
+as
+begin
+    insert into 
+        Kund2Kontakt (KundID, KontaktuppgiftID)
+    values
+        (@KundID, @KontaktuppgiftID);
+    set 
+        @ID = SCOPE_IDENTITY();
+end
+go
+
+create procedure GetKontaktuppgifterByKundID
+(
+    @KundID int
+)
+as
+begin
+    select
+        k2k.KundID,
+        k.Personnr, k.Förnamn, k.Efternamn,
+        k2k.KontaktuppgiftID,
+        ku.Kontakttyp, ku.Kontaktvärde
+    from
+        Kontaktuppgifter as ku
+    join 
+        Kund2Kontakt as k2k on 
+        ku.ID = k2k.KontaktuppgiftID
+    join
+        Kunder as k on
+        k2k.KundID = k.ID
+    where
+        k.ID = @KundID;
+end
+go
+
+create procedure GetKunderByKontaktuppgiftID
+(
+    @KontaktuppgiftID int
+)
+as
+begin
+    select
+        k2k.KundID,
+        k.Personnr, k.Förnamn, k.Efternamn,
+        k2k.KontaktuppgiftID, 
+        ku.Kontakttyp, ku.Kontaktvärde
+    from
+        Kontaktuppgifter as ku
+    join 
+        Kund2Kontakt as k2k on 
+        ku.ID = k2k.KontaktuppgiftID
+    join
+        Kunder as k on
+        k2k.KundID = k.ID
+    where
+        ku.ID = @KontaktuppgiftID;
+end
+go
+
+create procedure UpdateKund2Kontakt
+(
+    @ID int,
+    @KundID int,
+    @KontaktuppgiftID int
+)
+as
+begin
+    update
+        Kund2Kontakt
+    set
+        KundID = @KundID,
+        KontaktuppgiftID = @KontaktuppgiftID
+    where
+        ID = @ID;
+end
+go
+
+create procedure CascadeDeleteKund2Kontakt
+(
+    @ID int
+)
+as
+begin
+    delete from
+        Kund2Kontakt
+    where
+        ID = @ID;
+end
+go
+
     
 
 

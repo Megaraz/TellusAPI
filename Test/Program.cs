@@ -47,6 +47,35 @@ internal class Program
         //TEST_KUND.DeleteKundByID(kundRepository, 1009);
         #endregion
 
+        #region KUND2KONTAKT CRUD TESTER
+
+        //Kund2KontaktRepository kund2KontaktRepository = new Kund2KontaktRepository(connectionString);
+
+        //Kund2Kontakt kund2Kontakt = new Kund2Kontakt()
+        //{
+        //    KundID = 1001,
+        //    KontaktuppgiftID = 1
+        //};
+
+        //// (CREATE) Test för att lägga till ny relation mellan kund och kontaktuppgift
+        //TEST_KUND2KONTAKT.AddKund2Kontakt(kund2KontaktRepository, kund2Kontakt);
+
+        //// (READ) Test för att hämta kontaktuppgifter för en viss kund
+        //TEST_KUND2KONTAKT.GetKontaktuppgifterByKundID(kund2KontaktRepository, 1001);
+
+        //// (READ) Test för att hämta kunder för en viss kontaktuppgift
+        //TEST_KUND2KONTAKT.GetKunderByKontaktuppgiftID(kund2KontaktRepository, 1);
+
+        //// (UPDATE) Test för att uppdatera en relation mellan kund och kontaktuppgift
+        //kund2Kontakt.ID = 1; // Ange korrekt ID för att uppdatera
+        //kund2Kontakt.KontaktuppgiftID = 2; // Ändra kontaktuppgift
+        //TEST_KUND2KONTAKT.UpdateKund2Kontakt(kund2KontaktRepository, kund2Kontakt);
+
+        //// (DELETE) Test för att ta bort en relation mellan kund och kontaktuppgift
+        //TEST_KUND2KONTAKT.DeleteKund2Kontakt(kund2KontaktRepository, 1);
+
+        #endregion
+
         #region KUND2ADRESS CRUD TESTER
 
         // Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
@@ -80,7 +109,6 @@ internal class Program
         // TEST_KUND2ADRESS.DeleteKund2Adress(kund2AdressRepository, 1);
 
         #endregion
-
 
         #region ADRESS CRUD TESTER
 
@@ -168,6 +196,33 @@ internal class Program
 
         //// (DELETE) Test för att deletea en Order
         //TEST_ORDER.DeleteOrderByID(orderRepository, 5);
+
+        #endregion
+
+        #region PRODUKT2ORDER CRUD TESTER
+
+        //Produkt2OrderRepository produkt2OrderRepository = new Produkt2OrderRepository(connectionString);
+
+        //Produkt2Order produkt2Order = new Produkt2Order()
+        //{
+        //    ProduktID = 1,
+        //    OrderID = 1,
+        //    Antal = 3
+        //};
+
+        //// (CREATE) Test för att lägga till ny relation mellan produkt och order
+        //TEST_PRODUKT2ORDER.AddProdukt2Order(produkt2OrderRepository, produkt2Order);
+
+        //// (READ) Test för att hämta produkter för en viss order
+        //TEST_PRODUKT2ORDER.GetProdukterByOrderID(produkt2OrderRepository, 1);
+
+        //// (UPDATE) Test för att uppdatera en relation mellan produkt och order
+        //produkt2Order.ID = 1; // Ange korrekt ID för att uppdatera
+        //produkt2Order.Antal = 5; // Ändra antal
+        //TEST_PRODUKT2ORDER.UpdateProdukt2Order(produkt2OrderRepository, produkt2Order);
+
+        //// (DELETE) Test för att ta bort en relation mellan produkt och order
+        //TEST_PRODUKT2ORDER.DeleteProdukt2Order(produkt2OrderRepository, 1);
 
         #endregion
 
