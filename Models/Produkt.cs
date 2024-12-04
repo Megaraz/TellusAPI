@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Produkter
+/// </summary>
 public class Produkt
 {
     public Produkt(string produktnamn, string produktNummer, decimal pris, string? produktTyp = null, int id = -1)
@@ -15,7 +18,9 @@ public class Produkt
         Pris = pris;
         ProduktTyp = produktTyp;
     }
-
+    /// <summary>
+    /// Tom Constructor för att kunna användas i Generiska Repositoryn
+    /// </summary>
     public Produkt()
     {
 

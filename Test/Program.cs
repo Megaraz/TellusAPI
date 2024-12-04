@@ -5,9 +5,9 @@ namespace Test;
 internal class Program
 {
     
-
     static void Main(string[] args)
     {
+        // Fyll i egen connectionstring här.
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
         #region KUND CRUD TESTER

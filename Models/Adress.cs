@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Adresser
+/// </summary>
 public class Adress
 {
     public Adress(string gatuadress, string ort, string postnr, string? lghNummer = null, int id = -1)
@@ -16,7 +19,9 @@ public class Adress
         Postnr = postnr ?? throw new ArgumentNullException(nameof(postnr));
         LghNummer = lghNummer;
     }
-
+    /// <summary>
+    /// Tom Constructor för att kunna användas i Generiska Repositoryn
+    /// </summary>
     public Adress()
     {
 

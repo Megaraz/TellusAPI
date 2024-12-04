@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Order
+/// </summary>
 public class Order
 {
     public Order(int ordernr, bool ärSkickad, bool ärLevererad, bool ärBetald, DateTime tidVidBeställning, DateTime beräknadLeverans, int kund2KontaktID, string? betalsystem = null, int id = -1)
@@ -19,7 +22,9 @@ public class Order
         BeräknadLeverans = beräknadLeverans;
         Kund2KontaktID = kund2KontaktID;
     }
-
+    /// <summary>
+    /// Tom Constructor för att kunna användas i Generiska Repositoryn
+    /// </summary>
     public Order()
     {
 

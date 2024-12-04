@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Kontaktuppgifter
+/// </summary>
 public class Kontaktuppgift
 {
     public Kontaktuppgift(string kontakttyp, string kontaktvärde, int id = -1)
@@ -13,7 +16,9 @@ public class Kontaktuppgift
         Kontakttyp = kontakttyp ?? throw new ArgumentNullException(nameof(kontakttyp));
         Kontaktvärde = kontaktvärde ?? throw new ArgumentNullException(nameof(kontaktvärde));
     }
-
+    /// <summary>
+    /// Tom Constructor för att kunna användas Generiska Repositoryn
+    /// </summary>
     public Kontaktuppgift()
     {
 

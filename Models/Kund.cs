@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Kunder
+/// </summary>
 public class Kund
 {
     public Kund(string personnr, string förnamn, string efternamn, int iD = -1)
@@ -14,7 +17,9 @@ public class Kund
         Förnamn = förnamn ?? throw new ArgumentNullException(nameof(förnamn));
         Efternamn = efternamn ?? throw new ArgumentNullException(nameof(efternamn));
     }
-
+    /// <summary>
+    /// Tom Constructor för att kunna användas i Generiska Repositoryn
+    /// </summary>
     public Kund()
     {
 
