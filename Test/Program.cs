@@ -16,22 +16,23 @@ internal class Program
 
         #region KUND CRUD TESTER
 
-        KundRepository kundRepository = new KundRepository(connectionString);
+        //KundRepository kundRepository = new KundRepository(connectionString);
 
-        Kund kund = new Kund()
-        {
-            Personnr = "19661223-1234",
-            Förnamn = "Ånkel",
-            Efternamn = "Kånkel",
-        };
+        //Kund kund = new Kund()
+        //{
+        //    ID = 1011,
+        //    Personnr = "19671223-1234",
+        //    Förnamn = "Ånkel",
+        //    Efternamn = "Kånkel",
+        //};
 
 
         //// (CREATE)Test för att lägga till ny kund, fyll i fält ovanför.
         //TEST_KUND.AddKund(kundRepository, kund);
 
 
-        // (READ) Test för att hämta kund by ID
-        TEST_KUND.GetKundByID(kundRepository, 1011);
+        //// (READ) Test för att hämta kund by ID
+        //TEST_KUND.GetKundByID(kundRepository, 1011);
 
 
         //// (READ) Test för att hämta samtliga kunder
@@ -43,7 +44,7 @@ internal class Program
 
 
         //// (DELETE)Test för att deletea kund
-        //TEST_KUND.DeleteKundByID(kundRepository, 1026);
+        //TEST_KUND.DeleteKundByID(kundRepository, 1011);
         #endregion
 
         #region KONTAKTUPPGIFT CRUD TESTER
@@ -52,7 +53,7 @@ internal class Program
         //Kontaktuppgift kontaktuppgift = new Kontaktuppgift()
         //{
         //    Kontakttyp = "E-post",
-        //    Kontaktvärde = "test@example.com",
+        //    Kontaktvärde = "blabla@example.com",
         //    ID = 5
         //};
 
@@ -69,7 +70,7 @@ internal class Program
         //TEST_KONTAKTUPPGIFT.UpdateKontaktuppgift(kontaktuppgiftRepository, kontaktuppgift);
 
         //// (DELETE) Test för att deletea en Kontaktuppgift
-        //TEST_KONTAKTUPPGIFT.DeleteKontaktuppgiftByID(kontaktuppgiftRepository, 20);
+        //TEST_KONTAKTUPPGIFT.DeleteKontaktuppgiftByID(kontaktuppgiftRepository, 12);
 
         #endregion
 
@@ -78,18 +79,18 @@ internal class Program
         //AdressRepository adressRepository = new AdressRepository(connectionString);
         //Adress adress = new Adress()
         //{
-        //    Gatuadress = "Strandvägen 5 C",
+        //    Gatuadress = "Krokgatan 5 C",
         //    Ort = "Kungälv",
         //    Postnr = "459 32",
         //    LghNummer = null,
-        //    ID = 5
+        //    ID = 11
         //};
 
         //// (CREATE) Test för att lägga till ny Adress.
         //TEST_ADRESS.AddAdress(adressRepository, adress);
 
         //// (READ) Test för att hämta Adress by ID
-        //TEST_ADRESS.GetAdressByID(adressRepository, 5);
+        //TEST_ADRESS.GetAdressByID(adressRepository, 7);
 
         //// (READ) Test för att hämta samtliga Adresser
         //TEST_ADRESS.GetAdresser(adressRepository);
@@ -98,7 +99,7 @@ internal class Program
         //TEST_ADRESS.UpdateAdress(adressRepository, adress);
 
         //// (DELETE) Test för att deletea en Adress
-        //TEST_ADRESS.DeleteAdressByID(adressRepository, 20);
+        //TEST_ADRESS.DeleteAdressByID(adressRepository, 11);
 
         #endregion
 
@@ -110,7 +111,7 @@ internal class Program
         //    ÄrSkickad = false,
         //    ÄrLevererad = false,
         //    ÄrBetald = true,
-        //    Betalsystem = "Swish",
+        //    Betalsystem = "Kort",
         //    TidVidBeställning = DateTime.Now,
         //    BeräknadLeverans = DateTime.Now.AddDays(5),
         //    Kund2KontaktID = 1,
@@ -131,7 +132,7 @@ internal class Program
         //TEST_ORDER.UpdateOrder(orderRepository, order);
 
         //// (DELETE) Test för att deletea en Order
-        //TEST_ORDER.DeleteOrderByID(orderRepository, 20);
+        //TEST_ORDER.DeleteOrderByID(orderRepository, 5);
 
         #endregion
 
@@ -141,8 +142,8 @@ internal class Program
         //Produkt produkt = new Produkt()
         //{
         //    ProduktTyp = "Elektronik",
-        //    Produktnamn = "Trådlösa Hörlurar",
-        //    ProduktNummer = "123-456-789",
+        //    Produktnamn = "Trådlös Mus",
+        //    ProduktNummer = "123-456-787",
         //    Pris = 1999.99m,
         //    ID = 5
         //};
@@ -160,16 +161,9 @@ internal class Program
         //TEST_PRODUKT.UpdateProdukt(produktRepository, produkt);
 
         //// (DELETE) Test för att deletea en Produkt
-        //TEST_PRODUKT.DeleteProduktByID(produktRepository, 20);
+        //TEST_PRODUKT.DeleteProduktByID(produktRepository, 11);
 
         #endregion
-
-
-
-
-
-
-
 
     }
 

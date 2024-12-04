@@ -285,6 +285,6 @@ select * from [Order]
 
 drop database Tellus
 
+select * from Kontaktuppgifter
 
-
-
+select * from Produkter

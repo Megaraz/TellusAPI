@@ -42,6 +42,6 @@ public class Order
 
     public override string ToString()
     {
-        return $"ID: {ID}, Ordernr: {Ordernr}, ÄrSkickad: {ÄrSkickad}, ÄrLevererad: {ÄrLevererad}, ÄrBetald: {ÄrBetald}, Betalsysten: {Betalsystem}, TidVidBeställning: {TidVidBeställning}, BeräknadLeverans: {BeräknadLeverans}";
+        return $"ID: {ID}, Ordernr: {Ordernr}, ÄrSkickad: {ÄrSkickad}, ÄrLevererad: {ÄrLevererad}, ÄrBetald: {ÄrBetald}, Betalsystem: {Betalsystem}, TidVidBeställning: {TidVidBeställning}, BeräknadLeverans: {BeräknadLeverans}";
     }
 }

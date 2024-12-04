@@ -450,5 +450,75 @@ begin
 end
 go
 
+create procedure AddProdukt
+(
+    @ProduktTyp nvarchar(16),
+    @Produktnamn nvarchar(64),
+    @ProduktNummer nvarchar(128),
+    @Pris money,
+    @ID int output
+)
+as
+begin
+    insert into
+        Produkter
+        (
+            ProduktTyp,
+            Produktnamn,
+            ProduktNummer,
+            Pris
+        )
+    values
+    (
+        @ProduktTyp,
+        @Produktnamn,
+        @ProduktNummer,
+        @Pris
+    );
+
+    set 
+        @ID = SCOPE_IDENTITY();
+end
+go
+
+create procedure UpdateProdukt
+(
+    @ID int,
+    @ProduktTyp nvarchar(16),
+    @Produktnamn nvarchar(64),
+    @ProduktNummer nvarchar(128),
+    @Pris money
+)
+as
+begin
+    update
+        Produkter
+    set
+        ProduktTyp = @ProduktTyp,
+        Produktnamn = @Produktnamn,
+        ProduktNummer = @ProduktNummer,
+        Pris = @Pris
+    where
+        ID = @ID;
+end
+go
+
+create procedure CascadeDeleteProdukt
+(
+    @ID int
+)
+as
+begin
+    delete
+        from
+            Produkter
+    where
+        ID = @ID;
+end
+go
+
+
+
+
 
 
