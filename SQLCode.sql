@@ -179,7 +179,7 @@ values
     ('Kläder', 'Skor', 'P010', 999.99)
 go
 
-create table Produkter2Order
+create table Produkt2Order
 (
 	ID int identity primary key,
 	Antal int not null default 1,
@@ -190,7 +190,7 @@ create table Produkter2Order
 go
 
 insert into
-    Produkter2Order(ProduktID, OrderID, Antal)
+    Produkt2Order(ProduktID, OrderID, Antal)
 values
     (1, 1, 1), (2, 2, 2), (3, 3, 1), (4, 4, 1), (5, 4, 2),
     (6, 6, 3), (7, 7, 1), (8, 8, 1), (9, 9, 1), (10, 10, 1)
