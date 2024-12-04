@@ -120,3 +120,101 @@ drop database Tellus
 select * from Kontaktuppgifter
 
 select * from Produkter
+go
+
+create procedure GetAdresserByKundID
+(
+    @KundID int
+)
+as
+    begin
+        select
+            k2a.KundID,
+            a.Gatuadress, a.Ort, a.Postnr, a.[Lgh nummer],
+            k.Personnr, k.Förnamn, k.Efternamn
+        from
+            Adresser as a
+        join 
+            Kund2Adress as k2a on 
+            A.ID = k2a.AdressID
+        join
+            Kunder as k on
+            k2a.KundID = k.ID
+        where
+            k.ID = @KundID
+    end
+go
+
+exec GetAdresserByKundID @KundID = 1001
+go
+
+create procedure GetAdresserByKundID
+(
+    @KundID int
+)
+as
+begin
+    select
+        a.Gatuadress,
+        a.Ort,
+        a.Postnr,
+        a.[Lgh nummer],
+        k2a.KundID,
+        k.Personnr,
+        k.Förnamn,
+        k.Efternamn
+    from
+        Adresser as a
+    join 
+        Kund2Adress as k2a on a.ID = k2a.AdresserID
+    join
+        Kunder as k on k2a.KundID = k.ID
+    where
+        k.ID = @KundID;
+end;
+go
+
+
+
+select
+    a.Gatuadress, a.Ort, a.Postnr, a.[Lgh nummer],
+    k2a.KundID,
+    k.Personnr, k.Förnamn, k.Efternamn
+from
+    Adresser as a
+join 
+    Kund2Adress as k2a on 
+    A.ID = k2a.AdressID
+join
+    Kunder as k on
+    k2a.KundID = k.ID
+where
+    k.ID = 1001
+go
+
+
+create procedure GetKunderByAdressID
+(
+    @AdressID int
+)
+as
+begin
+    select
+            k2a.KundID,
+            k.Personnr, k.Förnamn, k.Efternamn,
+            k2a.AdressID, 
+            a.Gatuadress, a.Ort, a.Postnr, a.[Lgh nummer]
+        from
+            Adresser as a
+        join 
+            Kund2Adress as k2a on 
+            A.ID = k2a.AdressID
+        join
+            Kunder as k on
+            k2a.KundID = k.ID
+        where
+            a.ID = @AdressID;
+end
+go
+
+exec GetKunderByAdressID @AdressID = 1

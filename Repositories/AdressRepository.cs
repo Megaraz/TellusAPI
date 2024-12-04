@@ -114,7 +114,7 @@ public class AdressRepository
         command.Parameters.Add("@LghNummer", SqlDbType.NVarChar, 4).Value = adress.LghNummer ?? (object)DBNull.Value;
     }
     /// <summary>
-    /// Updaterar en specifik Adress post i Tellus DB utifrån giltigt ID, genom GenericRepository och via Stored Procedure "UpdateAdress"
+    /// Updaterar en specifik Adress post i Tellus DB, genom GenericRepository och via Stored Procedure "UpdateAdress"
     /// </summary>
     /// <param name="adress"></param>
     /// <exception cref="ArgumentException"></exception>

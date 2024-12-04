@@ -510,15 +510,109 @@ create procedure CascadeDeleteProdukt
 )
 as
 begin
-    delete
-        from
-            Produkter
+    delete from
+        Produkter
     where
         ID = @ID;
 end
 go
 
+create procedure AddKund2Adress
+(
+    @KundID int,
+    @AdressID int
+)
+as
+begin
+    insert into 
+        Kund2Adress (KundID, AdressID)
+    values
+        (@KundID, @AdressID)
+end
+go
 
+create procedure GetAdresserByKundID
+(
+    @KundID int
+)
+as
+    begin
+        select
+            k2a.KundID,
+            k.Personnr, k.Förnamn, k.Efternamn,
+            k2a.AdressID,
+            a.Gatuadress, a.Ort, a.Postnr, a.[Lgh nummer]
+        from
+            Adresser as a
+        join 
+            Kund2Adress as k2a on 
+            A.ID = k2a.AdressID
+        join
+            Kunder as k on
+            k2a.KundID = k.ID
+        where
+            k.ID = @KundID
+    end
+go
+
+create procedure GetKunderByAdressID
+(
+    @AdressID int
+)
+as
+begin
+    select
+            k2a.KundID,
+            k.Personnr, k.Förnamn, k.Efternamn,
+            k2a.AdressID, 
+            a.Gatuadress, a.Ort, a.Postnr, a.[Lgh nummer]
+        from
+            Adresser as a
+        join 
+            Kund2Adress as k2a on 
+            A.ID = k2a.AdressID
+        join
+            Kunder as k on
+            k2a.KundID = k.ID
+        where
+            a.ID = @AdressID;
+end
+go
+
+create procedure UpdateKund2Adress
+(
+    @ID int,
+    @KundID int,
+    @AdressID int
+)
+as
+    begin
+        update
+            Kund2Adress
+        set
+            KundID = @KundID,
+            AdressID = @AdressID
+        where
+            ID = @ID
+    end
+go
+
+create procedure CascadeDeleteKund2Adress
+(
+    @ID int
+)
+as
+    begin
+        delete from
+            Kund2Adress
+        where
+            ID = @ID
+    end
+go
+
+
+    
+    
 
 
 
