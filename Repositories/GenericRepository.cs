@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories;
 /// <summary>
-/// Generell Repo med generiska metoder som skall funka för varje Model/Table
+/// Generisk Repo som sköter huvudlogik(CRUD) för klasser oavsett vilken det är
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class GenericRepository<T> where T : class, new()
@@ -19,7 +19,13 @@ public class GenericRepository<T> where T : class, new()
     {
         _connectionString = connectionString;
     }
-
+    /// <summary>
+    /// Öppnar connection till Tellus DB och lägger till en ny post via Stored Procedure
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="getInParameters"></param>
+    /// <param name="handleOutPut"></param>
+    /// <param name="procedureName"></param>
     public void AddEntity(T entity, Action<SqlCommand, T> getInParameters, Action<SqlCommand, T> handleOutPut, string procedureName)
     {
         using SqlConnection connection = new SqlConnection(_connectionString);
@@ -38,7 +44,12 @@ public class GenericRepository<T> where T : class, new()
 
     }
 
-
+    /// <summary>
+    /// Öppnar connection till Tellus DB och hämtar samtliga poster för angiven klass(entity)
+    /// </summary>
+    /// <param name="mapToEntity"></param>
+    /// <param name="query"></param>
+    /// <returns>en lista av angiven klass(entity)</returns>
     public List<T> GetEntities(Func<SqlDataReader, T> mapToEntity, string query)
     {
         List<T> entities = new List<T>();
@@ -64,7 +75,14 @@ public class GenericRepository<T> where T : class, new()
     }
 
 
-
+    /// <summary>
+    /// Öppnar connection till Tellus DB och hämtar en specifik post utifrån angiven ID och Klass(Entity)
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="getEntityParameters"></param>
+    /// <param name="mapToEntity"></param>
+    /// <param name="query"></param>
+    /// <returns></returns>
     public T? GetByID(int id, Action<SqlCommand, int> getEntityParameters, Func<SqlDataReader, T> mapToEntity, string query)
     {
         T? result = null;
@@ -92,7 +110,12 @@ public class GenericRepository<T> where T : class, new()
     }
 
 
-
+    /// <summary>
+    /// Öppnar connection till Tellus DB och uppdaterar en specifik post utifrån angiven Klass(entity) via Stored Procedure
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="updateParameters"></param>
+    /// <param name="procedureName"></param>
     public void Update(T entity, Action<SqlCommand, T> updateParameters, string procedureName)
     {
         using SqlConnection connection = new SqlConnection(_connectionString);
@@ -107,7 +130,12 @@ public class GenericRepository<T> where T : class, new()
         command.ExecuteNonQuery();
     }
 
-
+    /// <summary>
+    /// Öppnar connection till Tellus DB och deletar en specifik post utifrån angiven Klass(entity) och ID, via Stored Procedure.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="getEntityParameters"></param>
+    /// <param name="procedureName"></param>
     public void DeleteEntity(int id, Action<SqlCommand, int> getEntityParameters, string procedureName)
     {
         using SqlConnection connection = new SqlConnection(_connectionString);
@@ -123,35 +151,4 @@ public class GenericRepository<T> where T : class, new()
         command.ExecuteNonQuery();
     }
 
-
-    ///// <summary>
-    ///// Creates a command of a StoredProcedure type
-    ///// </summary>
-    ///// <param name="connection"></param>
-    ///// <param name="procedureName"></param>
-    ///// <returns>a SqlCommand instance</returns>
-    //public static SqlCommand CreateCommandProcedure(SqlConnection connection, string procedureName)
-    //{
-    //    SqlCommand command = connection.CreateCommand();
-
-    //    command.CommandType = CommandType.StoredProcedure;
-    //    command.CommandText = procedureName;
-
-    //    return command;
-    //}
-    ///// <summary>
-    ///// Creates a command of a Text(Query) type
-    ///// </summary>
-    ///// <param name="connection"></param>
-    ///// <param name="query"></param>
-    ///// <returns>a SqlCommand instance</returns>
-    //public static SqlCommand CreateCommandText(SqlConnection connection, string query)
-    //{
-    //    SqlCommand command = connection.CreateCommand();
-
-    //    command.CommandType = CommandType.Text;
-    //    command.CommandText = query;
-
-    //    return command;
-    //}
 }
