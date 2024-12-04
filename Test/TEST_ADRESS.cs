@@ -11,6 +11,16 @@ static class TEST_ADRESS
 {
     public static void UpdateAdress(AdressRepository adressRepository, Adress adress)
     {
+
+        if (adress.ID <= 0)
+        {
+            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
+        }
+
+        if (adressRepository.GetAdressByID(adress.ID) == null)
+        {
+            throw new ArgumentException($"Ingen adress med ID {adress.ID} hittades i databasen.\n\n");
+        }
         adressRepository.UpdateAdress(adress);
         Console.WriteLine($"Adressen har uppdaterats:\n{adress}");
     }

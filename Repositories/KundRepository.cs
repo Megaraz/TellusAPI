@@ -124,16 +124,6 @@ public class KundRepository
     /// <exception cref="ArgumentException"></exception>
     public void UpdateKund(Kund kund)
     {
-        if (kund.ID <= 0)
-        {
-            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
-        }
-
-        if (GetKundByID(kund.ID) == null)
-        {
-            throw new ArgumentException($"Ingen kund med ID {kund.ID} hittades i databasen. \n\n");
-        }
-
         _genericRepo.Update(kund, UpdateKundParameters, null, "UpdateKund");
 
     }

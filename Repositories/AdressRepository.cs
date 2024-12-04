@@ -120,15 +120,6 @@ public class AdressRepository
     /// <exception cref="ArgumentException"></exception>
     public void UpdateAdress(Adress adress)
     {
-        if (adress.ID <= 0)
-        {
-            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
-        }
-
-        if (GetAdressByID(adress.ID) == null)
-        {
-            throw new ArgumentException($"Ingen adress med ID {adress.ID} hittades i databasen.\n\n");
-        }
         _genericRepo.Update(adress, UpdateAdressParameters, null, "UpdateAdress");
     }
     #endregion

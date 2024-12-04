@@ -10,6 +10,16 @@ static class TEST_KONTAKTUPPGIFT
 {
     public static void UpdateKontaktuppgift(KontaktuppgiftRepository kontaktuppgiftRepository, Kontaktuppgift kontaktuppgift)
     {
+
+        if (kontaktuppgift.ID <= 0)
+        {
+            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
+        }
+        if (kontaktuppgiftRepository.GetKontaktuppgiftByID(kontaktuppgift.ID) == null)
+        {
+            throw new ArgumentException($"Ingen kontaktuppgift med ID {kontaktuppgift.ID} hittades i databasen\n\n");
+        }
+
         kontaktuppgiftRepository.UpdateKontaktuppgift(kontaktuppgift);
         Console.WriteLine($"Kontaktuppgiften har uppdaterats:\n{kontaktuppgift}");
     }

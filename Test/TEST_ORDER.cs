@@ -10,6 +10,16 @@ static class TEST_ORDER
 {
     public static void UpdateOrder(OrderRepository orderRepository, Order order)
     {
+        if (order.ID <= 0)
+        {
+            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
+        }
+        if (orderRepository.GetOrderByID(order.ID) == null)
+        {
+            throw new ArgumentException($"Ingen order med ID {order.ID} hittades i databasen.\n\n");
+        }
+
+
         orderRepository.UpdateOrder(order);
         Console.WriteLine($"Ordern har uppdaterats:\n{order}");
     }

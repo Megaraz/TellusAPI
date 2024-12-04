@@ -16,21 +16,22 @@ internal class Program
 
         #region KUND CRUD TESTER
 
-        //KundRepository kundRepository = new KundRepository(_connectionString);
+        KundRepository kundRepository = new KundRepository(connectionString);
 
-        //string personnr = "19950410-5235";
-        //string förnamn = "Rasmus";
-        //string efternamn = "Läckberg";
-
-        //Kund kund = new Kund(personnr, förnamn, efternamn);
+        Kund kund = new Kund()
+        {
+            Personnr = "19661223-1234",
+            Förnamn = "Ånkel",
+            Efternamn = "Kånkel",
+        };
 
 
         //// (CREATE)Test för att lägga till ny kund, fyll i fält ovanför.
         //TEST_KUND.AddKund(kundRepository, kund);
 
 
-        //// (READ) Test för att hämta kund by ID
-        //TEST_KUND.GetKundByID(kundRepository, 1025);
+        // (READ) Test för att hämta kund by ID
+        TEST_KUND.GetKundByID(kundRepository, 1011);
 
 
         //// (READ) Test för att hämta samtliga kunder
@@ -74,15 +75,15 @@ internal class Program
 
         #region ADRESS CRUD TESTER
 
-        AdressRepository adressRepository = new AdressRepository(connectionString);
-        Adress adress = new Adress()
-        {
-            Gatuadress = "Strandvägen 5 C",
-            Ort = "Kungälv",
-            Postnr = "459 32",
-            LghNummer = null,
-            ID = 5
-        };
+        //AdressRepository adressRepository = new AdressRepository(connectionString);
+        //Adress adress = new Adress()
+        //{
+        //    Gatuadress = "Strandvägen 5 C",
+        //    Ort = "Kungälv",
+        //    Postnr = "459 32",
+        //    LghNummer = null,
+        //    ID = 5
+        //};
 
         //// (CREATE) Test för att lägga till ny Adress.
         //TEST_ADRESS.AddAdress(adressRepository, adress);

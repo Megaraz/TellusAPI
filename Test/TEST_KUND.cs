@@ -15,6 +15,16 @@ static class TEST_KUND
 
     public static void UpdateKund(KundRepository kundRepository, Kund kund)
     {
+        if (kund.ID <= 0)
+        {
+            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
+        }
+
+        if (kundRepository.GetKundByID(kund.ID) == null)
+        {
+            throw new ArgumentException($"Ingen kund med ID {kund.ID} hittades i databasen. \n\n");
+        }
+
         kundRepository.UpdateKund(kund);
         Console.WriteLine($"Kunden har uppdaterats:\n{kund}");
     }

@@ -113,16 +113,7 @@ public class KontaktuppgiftRepository
     /// <exception cref="ArgumentException"></exception>
     public void UpdateKontaktuppgift(Kontaktuppgift kontaktuppgift)
     {
-        if (kontaktuppgift.ID <= 0)
-        {
-            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
-        }
-        if (GetKontaktuppgiftByID(kontaktuppgift.ID) == null)
-        {
-            throw new ArgumentException($"Ingen kontaktuppgift med ID {kontaktuppgift.ID} hittades i databasen\n\n");
-        }
-
-        _genericRepo.Update(kontaktuppgift, UpdateKontaktuppgiftParameters, null, "UpdateKontaktuppgift");
+         _genericRepo.Update(kontaktuppgift, UpdateKontaktuppgiftParameters, null, "UpdateKontaktuppgift");
     }
     #endregion
     #region DELETE Metod

@@ -10,6 +10,15 @@ static class TEST_PRODUKT
 {
     public static void UpdateProdukt(ProduktRepository produktRepository, Produkt produkt)
     {
+        if (produkt.ID <= 0)
+        {
+            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
+        }
+        if (produktRepository.GetProduktByID(produkt.ID) == null)
+        {
+            throw new ArgumentException($"Ingen produkt med ID {produkt.ID} hittades i databasen.\n\n");
+        }
+
         produktRepository.UpdateProdukt(produkt);
         Console.WriteLine($"Produkten har uppdaterats:\n{produkt}");
     }

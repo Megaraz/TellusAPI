@@ -137,21 +137,7 @@ public class OrderRepository
     /// <exception cref="ArgumentException"></exception>
     public void UpdateOrder(Order order)
     {
-        if (order.ID <= 0)
-        {
-            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
-        }
-        if (GetOrderByID(order.ID) == null)
-        {
-            throw new ArgumentException($"Ingen order med ID {order.ID} hittades i databasen.\n\n");
-        }
-
-
         _genericRepo.Update(order, UpdateOrderParameters, HandleOutPutOrder, "UpdateOrder");
-
-
-
-
     }
     #endregion
 

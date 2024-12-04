@@ -121,15 +121,6 @@ public class ProduktRepository
     /// <exception cref="ArgumentException"></exception>
     public void UpdateProdukt(Produkt produkt)
     {
-        if (produkt.ID <= 0)
-        {
-            throw new ArgumentException("Ogiltigt eller tomt ID, fyll i korrekt ID\n\n");
-        }
-        if (GetProduktByID(produkt.ID) == null)
-        {
-            throw new ArgumentException($"Ingen produkt med ID {produkt.ID} hittades i databasen.\n\n");
-        }
-
         _genericRepo.Update(produkt, UpdateProduktParameters, null, "UpdateProdukt");
     }
     #endregion
