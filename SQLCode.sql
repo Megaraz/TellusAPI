@@ -121,7 +121,7 @@ go
 create table [Order]
 (
 	ID int identity primary key,
-	Ordernr int identity(10000, 1) unique not null,
+	Ordernr int unique not null,
 	ÄrSkickad BIT not null default 0,
 	ÄrLevererad BIT not null default 0,
 	ÄrBetald BIT not null default 0,
@@ -135,16 +135,16 @@ go
 insert into
     [Order]
 values
-    (10001, 0, 0, 0, 'Swish', GETDATE(), DATEADD(day, 5, GETDATE()), 1),
-    (10002, 1, 0, 0, 'Klarna', GETDATE(), DATEADD(day, 3, GETDATE()), 2),
-    (10003, 0, 0, 0, null, GETDATE(), DATEADD(day, 7, GETDATE()), 3),
-    (10004, 1, 1, 1, 'Kort', GETDATE(), DATEADD(day, 2, GETDATE()), 4),
-    (10005, 0, 0, 1, 'Faktura', GETDATE(), DATEADD(day, 10, GETDATE()), 5),
-    (10006, 0, 0, 0, null, GETDATE(), DATEADD(day, 8, GETDATE()), 6),
-    (10007, 1, 1, 1, 'Swish', GETDATE(), DATEADD(day, 1, GETDATE()), 7),
-    (10008, 1, 0, 1, 'Klarna', GETDATE(), DATEADD(day, 4, GETDATE()), 8),
-    (10009, 0, 0, 0, 'Kort', GETDATE(), DATEADD(day, 6, GETDATE()), 9),
-    (10010, 0, 0, 0, 'Faktura', GETDATE(), DATEADD(day, 12, GETDATE()), 10)
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Swish', GETDATE(), DATEADD(day, 5, GETDATE()), 1),
+    (NEXT VALUE FOR OrdernrSequence, 1, 0, 0, 'Klarna', GETDATE(), DATEADD(day, 3, GETDATE()), 2),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 7, GETDATE()), 3),
+    (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Kort', GETDATE(), DATEADD(day, 2, GETDATE()), 4),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 1, 'Faktura', GETDATE(), DATEADD(day, 10, GETDATE()), 5),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 8, GETDATE()), 6),
+    (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Swish', GETDATE(), DATEADD(day, 1, GETDATE()), 7),
+    (NEXT VALUE FOR OrdernrSequence, 1, 0, 1, 'Klarna', GETDATE(), DATEADD(day, 4, GETDATE()), 8),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Kort', GETDATE(), DATEADD(day, 6, GETDATE()), 9),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Faktura', GETDATE(), DATEADD(day, 12, GETDATE()), 10)
 go
 
 
@@ -350,9 +350,13 @@ begin
 end
 go
 
+create sequence OrdernrSequence
+start with 10000
+increment by 1
+go
+
 create procedure AddOrder
 (
-    @Ordernr int,
     @ÄrSkickad bit,
     @ÄrLevererad bit,
     @ÄrBetald bit,
@@ -360,6 +364,7 @@ create procedure AddOrder
     @TidVidBeställning datetime,
     @BeräknadLeverans datetime,
     @Kund2KontaktID int,
+
     @ID int output
 )
 as
@@ -378,7 +383,7 @@ begin
         )
     values 
         (
-            @Ordernr, 
+            NEXT VALUE FOR OrdernrSequence, 
             @ÄrSkickad, 
             @ÄrLevererad, 
             @ÄrBetald, 
@@ -396,7 +401,6 @@ go
 create procedure UpdateOrder
 (
     @ID int,
-    @Ordernr int,
     @ÄrSkickad bit,
     @ÄrLevererad bit,
     @ÄrBetald bit,
@@ -410,7 +414,6 @@ begin
     update 
         [Order]
     set 
-        Ordernr = @Ordernr,
         ÄrSkickad = @ÄrSkickad,
         ÄrLevererad = @ÄrLevererad,
         ÄrBetald = @ÄrBetald,

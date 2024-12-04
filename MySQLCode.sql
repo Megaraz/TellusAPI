@@ -283,5 +283,8 @@ select * from Produkter
 select * from [Order]
 
 
+drop database Tellus
+
+
 
 
