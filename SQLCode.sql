@@ -62,14 +62,14 @@ go
 create table Kund2Adress
 (
 	ID int identity primary key,
-	KunderID int not null references Kunder(ID) on delete cascade,
-	AdresserID int not null references Adresser(ID) on delete cascade,
-	unique(KunderID, AdresserID)
+	KundID int not null references Kunder(ID) on delete cascade,
+	AdressID int not null references Adresser(ID) on delete cascade,
+	unique(KundID, AdressID)
 )
 go
 
 insert into
-    Kund2Adress(KunderID, AdresserID)
+    Kund2Adress(KundID, AdressID)
 values
     (1001, 1), (1001, 2), (1002, 3), (1003, 4), (1004, 5),
     (1006, 6), (1006, 7), (1008, 8), (1009, 9), (1010, 10)
@@ -105,14 +105,14 @@ go
 create table Kund2Kontakt
 (
 	ID int identity primary key,
-	KunderID int not null references Kunder(ID) on delete cascade,
-	KontaktuppgifterID int not null references Kontaktuppgifter(ID) on delete cascade,
-	unique(KunderID, KontaktuppgifterID)
+	KundID int not null references Kunder(ID) on delete cascade,
+	KontaktuppgiftID int not null references Kontaktuppgifter(ID) on delete cascade,
+	unique(KundID, KontaktuppgiftID)
 )
 go
 
 insert into
-    Kund2Kontakt(KunderID, KontaktuppgifterID)
+    Kund2Kontakt(KundID, KontaktuppgiftID)
 values
     (1001, 1), (1001, 2), (1002, 3), (1002, 4), (1003, 5),
     (1003, 6), (1004, 7), (1004, 8), (1005, 9), (1005, 10)
@@ -133,23 +133,23 @@ create table [Order]
 	Betalsystem nvarchar(32) null,
 	TidVidBeställning DateTime not null,
 	BeräknadLeverans DateTime not null,
-	Kund2KontaktID int not null references Kund2Kontakt(ID) 
+	KundID int not null references Kunder(ID) on delete cascade 
 )
 go
 
 insert into
     [Order]
 values
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Swish', GETDATE(), DATEADD(day, 5, GETDATE()), 1),
-    (NEXT VALUE FOR OrdernrSequence, 1, 0, 0, 'Klarna', GETDATE(), DATEADD(day, 3, GETDATE()), 2),
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 7, GETDATE()), 3),
-    (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Kort', GETDATE(), DATEADD(day, 2, GETDATE()), 4),
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 1, 'Faktura', GETDATE(), DATEADD(day, 10, GETDATE()), 5),
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 8, GETDATE()), 6),
-    (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Swish', GETDATE(), DATEADD(day, 1, GETDATE()), 7),
-    (NEXT VALUE FOR OrdernrSequence, 1, 0, 1, 'Klarna', GETDATE(), DATEADD(day, 4, GETDATE()), 8),
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Kort', GETDATE(), DATEADD(day, 6, GETDATE()), 9),
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Faktura', GETDATE(), DATEADD(day, 12, GETDATE()), 10)
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Swish', GETDATE(), DATEADD(day, 5, GETDATE()), 1001),
+    (NEXT VALUE FOR OrdernrSequence, 1, 0, 0, 'Klarna', GETDATE(), DATEADD(day, 3, GETDATE()), 1001),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 7, GETDATE()), 1001),
+    (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Kort', GETDATE(), DATEADD(day, 2, GETDATE()), 1004),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 1, 'Faktura', GETDATE(), DATEADD(day, 10, GETDATE()), 1005),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 8, GETDATE()), 1006),
+    (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Swish', GETDATE(), DATEADD(day, 1, GETDATE()), 1007),
+    (NEXT VALUE FOR OrdernrSequence, 1, 0, 1, 'Klarna', GETDATE(), DATEADD(day, 4, GETDATE()), 1008),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Kort', GETDATE(), DATEADD(day, 6, GETDATE()), 1009),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Faktura', GETDATE(), DATEADD(day, 12, GETDATE()), 1010)
 go
 
 
@@ -183,14 +183,14 @@ create table Produkter2Order
 (
 	ID int identity primary key,
 	Antal int not null default 1,
-	ProdukterID int not null references Produkter(ID) on delete cascade,
+	ProduktID int not null references Produkter(ID) on delete cascade,
 	[OrderID] int not null references [Order](ID) on delete cascade,
-	unique(ProdukterID, [OrderID])
+	unique(ProduktID, [OrderID])
 )
 go
 
 insert into
-    Produkter2Order(ProdukterID, OrderID, Antal)
+    Produkter2Order(ProduktID, OrderID, Antal)
 values
     (1, 1, 1), (2, 2, 2), (3, 3, 1), (4, 4, 1), (5, 4, 2),
     (6, 6, 3), (7, 7, 1), (8, 8, 1), (9, 9, 1), (10, 10, 1)
@@ -365,7 +365,7 @@ create procedure AddOrder
     @Betalsystem nvarchar(32),
     @TidVidBeställning datetime,
     @BeräknadLeverans datetime,
-    @Kund2KontaktID int,
+    @KundID int,
 
     @ID int output,
     @Ordernr int output
@@ -383,7 +383,7 @@ begin
             Betalsystem, 
             TidVidBeställning, 
             BeräknadLeverans, 
-            Kund2KontaktID
+            KundID
         )
     values 
         (
@@ -394,7 +394,7 @@ begin
             @Betalsystem, 
             @TidVidBeställning, 
             @BeräknadLeverans, 
-            @Kund2KontaktID
+            @KundID
         );
 
     set 
@@ -413,7 +413,7 @@ create procedure UpdateOrder
     @Betalsystem nvarchar(32),
     @TidVidBeställning datetime,
     @BeräknadLeverans datetime,
-    @Kund2KontaktID int,
+    @KundID int,
 
     @Ordernr int output
 )
@@ -428,7 +428,7 @@ begin
         Betalsystem = @Betalsystem,
         TidVidBeställning = @TidVidBeställning,
         BeräknadLeverans = @BeräknadLeverans,
-        Kund2KontaktID = @Kund2KontaktID
+        KundID = @KundID
     where 
         ID = @ID;
     set

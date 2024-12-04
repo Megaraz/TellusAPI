@@ -35,7 +35,7 @@ public class OrderRepository
         command.Parameters.Add("@Betalsystem", SqlDbType.NVarChar, 32).Value = order.Betalsystem ?? (object)DBNull.Value;
         command.Parameters.Add("@TidVidBeställning", SqlDbType.DateTime).Value = order.TidVidBeställning;
         command.Parameters.Add("@BeräknadLeverans", SqlDbType.DateTime).Value = order.BeräknadLeverans;
-        command.Parameters.Add("@Kund2KontaktID", SqlDbType.Int).Value = order.Kund2KontaktID;
+        command.Parameters.Add("@KundID", SqlDbType.Int).Value = order.KundID;
 
         // Out-parameter
         command.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -84,7 +84,7 @@ public class OrderRepository
             reader.GetBoolean(reader.GetOrdinal("ÄrBetald")),
             reader.GetDateTime(reader.GetOrdinal("TidVidBeställning")),
             reader.GetDateTime(reader.GetOrdinal("BeräknadLeverans")),
-            reader.GetInt32(reader.GetOrdinal("Kund2KontaktID")),
+            reader.GetInt32(reader.GetOrdinal("KundID")),
             reader.IsDBNull("Betalsystem") ? null : reader.GetString(reader.GetOrdinal("Betalsystem")),
             reader.GetInt32(reader.GetOrdinal("ID")),
             reader.GetInt32(reader.GetOrdinal("Ordernr"))

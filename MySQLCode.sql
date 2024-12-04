@@ -10,217 +10,49 @@ drop table Kunder
 exec dbo.CascadeDeleteKund @ID = 1007;
 
 select
-	*
+    K.ID,
+	K.Personnr, K.Förnamn, K.Efternamn,
+    KU.Kontakttyp, KU.Kontaktvärde,    
+    O.*
 from
 	Kunder as K
-left join
+full join
 	Kund2Kontakt as K2K on
 	K2K.KunderID = K.ID
-right join
+full join
 	Kontaktuppgifter as KU on
 	K2K.KontaktuppgifterID = KU.ID
+full join
+    [Order] as O on
+    K.ID = O.KundID
+where
+    K.ID = 1001
+group by
+    COUNT(Kontaktvärde) 
 go
 
-INSERT INTO Kunder (Personnr, Förnamn, Efternamn)
-VALUES 
-('19900101-1234', 'Anna', 'Svensson'),
-('19850505-5678', 'Erik', 'Johansson'),
-('20000101-9876', 'Maria', 'Andersson'),
-('19781212-4321', 'Lars', 'Karlsson'),
-('19950615-1111', 'Emma', 'Nilsson');
-GO
+select * from Kund2Kontakt
+
+insert into [order]
+values
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 7, GETDATE()), 1)
+    
+
+select
+    K.Personnr, K.Förnamn, K.Efternamn,
+    '---' as [ ],
+    A.Gatuadress, A.Ort, A.Postnr, A.[Lgh nummer]
+from
+    Kunder as K
+full join
+    Kund2Adress as K2A on
+    K.ID = K2A.KundID
+full join
+    Adresser as A on
+    K2a.AdressID = A.ID
+    
 
 
-create procedure AddAdress
-(
-    @Gatuadress nvarchar(32),
-    @Ort nvarchar(32),
-    @Postnr nvarchar(6),
-    @LghNummer nvarchar(4),
-    @ID int output
-)
-as
-begin
-    insert into 
-        Adresser (Gatuadress, Ort, Postnr, [Lgh nummer])
-    values 
-        (@Gatuadress, @Ort, @Postnr, @LghNummer);
-
-    set 
-        @ID = SCOPE_IDENTITY();
-end
-go
-
-
-create procedure UpdateAdress
-(
-    @ID int,
-    @Gatuadress nvarchar(32),
-    @Ort nvarchar(32),
-    @Postnr nvarchar(6),
-    @LghNummer nvarchar(4)
-)
-as
-begin
-    update 
-        Adresser
-    set 
-        Gatuadress = @Gatuadress,
-        Ort = @Ort,
-        Postnr = @Postnr,
-        [Lgh nummer] = @LghNummer
-    where 
-        ID = @ID;
-end
-go
-
-create procedure CascadeDeleteAdress
-(
-    @ID int
-)
-as
-begin
-    delete from 
-        Adresser
-    where 
-        ID = @ID;
-end
-go
-
-alter procedure AddKontaktuppgift
-(
-    @Kontakttyp nvarchar(16),
-    @Kontaktvärde nvarchar(64),
-    @ID int output
-)
-as
-begin
-    insert into 
-        Kontaktuppgifter (Kontakttyp, Kontaktvärde)
-    values 
-        (@Kontakttyp, @Kontaktvärde);
-
-    set 
-        @ID = SCOPE_IDENTITY();
-end
-go
-
-alter procedure UpdateKontaktuppgift
-(
-    @ID int,
-    @Kontakttyp nvarchar(16),
-    @Kontaktvärde nvarchar(64)
-)
-as
-begin
-    update 
-        Kontaktuppgifter
-    set 
-        Kontakttyp = @Kontakttyp,
-        Kontaktvärde = @Kontaktvärde
-    where 
-        ID = @ID;
-end
-go
-
-alter procedure CascadeDeleteKontaktuppgift
-(
-    @ID int
-)
-as
-begin
-    delete from 
-        Kontaktuppgifter
-    where 
-        ID = @ID;
-end
-go
-
-create procedure AddOrder
-(
-    @Ordernr int,
-    @ÄrSkickad bit,
-    @ÄrLevererad bit,
-    @ÄrBetald bit,
-    @Betalsystem nvarchar(32),
-    @TidVidBeställning datetime,
-    @BeräknadLeverans datetime,
-    @Kund2KontaktID int,
-    @ID int output
-)
-as
-begin
-    insert into 
-        [Order] 
-        (
-            Ordernr, 
-            ÄrSkickad, 
-            ÄrLevererad, 
-            ÄrBetald, 
-            Betalsystem, 
-            TidVidBeställning, 
-            BeräknadLeverans, 
-            Kund2KontaktID
-        )
-    values 
-        (
-            @Ordernr, 
-            @ÄrSkickad, 
-            @ÄrLevererad, 
-            @ÄrBetald, 
-            @Betalsystem, 
-            @TidVidBeställning, 
-            @BeräknadLeverans, 
-            @Kund2KontaktID
-        );
-
-    set 
-        @ID = SCOPE_IDENTITY();
-end
-go
-
-create procedure UpdateOrder
-(
-    @ID int,
-    @Ordernr int,
-    @ÄrSkickad bit,
-    @ÄrLevererad bit,
-    @ÄrBetald bit,
-    @Betalsystem nvarchar(32),
-    @TidVidBeställning datetime,
-    @BeräknadLeverans datetime,
-    @Kund2KontaktID int
-)
-as
-begin
-    update 
-        [Order]
-    set 
-        Ordernr = @Ordernr,
-        ÄrSkickad = @ÄrSkickad,
-        ÄrLevererad = @ÄrLevererad,
-        ÄrBetald = @ÄrBetald,
-        Betalsystem = @Betalsystem,
-        TidVidBeställning = @TidVidBeställning,
-        BeräknadLeverans = @BeräknadLeverans,
-        Kund2KontaktID = @Kund2KontaktID
-    where 
-        ID = @ID;
-end
-go
-
-create procedure CascadeDeleteOrder
-(
-    @ID int
-)
-as
-begin
-    delete from 
-        [Order]
-    where 
-        ID = @ID;
-end
-go
 
 use Tellus
 

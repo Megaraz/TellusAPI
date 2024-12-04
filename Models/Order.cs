@@ -38,7 +38,7 @@ public class Order
     public string? Betalsystem { get; set; }
     public DateTime TidVidBeställning { get; set; }
     public DateTime BeräknadLeverans { get; set; }
-    public int Kund2KontaktID { get; set; }
+    public int KundID { get; set; }
 
     public override string ToString()
     {
