@@ -121,7 +121,7 @@ go
 create table [Order]
 (
 	ID int identity primary key,
-	Ordernr int unique not null,
+	Ordernr int identity(10000, 1) unique not null,
 	ÄrSkickad BIT not null default 0,
 	ÄrLevererad BIT not null default 0,
 	ÄrBetald BIT not null default 0,
@@ -231,6 +231,7 @@ begin
 end
 go
 
+-- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
 create procedure CascadeDeleteKund(@ID int)
 as
 	begin
@@ -285,6 +286,7 @@ begin
 end
 go
 
+-- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
 create procedure CascadeDeleteAdress
 (
     @ID int
@@ -334,6 +336,7 @@ begin
 end
 go
 
+-- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
 create procedure CascadeDeleteKontaktuppgift
 (
     @ID int
@@ -420,6 +423,7 @@ begin
 end
 go
 
+-- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
 create procedure CascadeDeleteOrder
 (
     @ID int

@@ -1,3 +1,6 @@
+drop table Tellus
+go
+
 select * from Kunder
 order by
 	ID 

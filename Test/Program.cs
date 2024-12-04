@@ -10,7 +10,7 @@ internal class Program
         // Fyll i egen connectionstring här.
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-        
+
         // Regioner nedan innehåller metoder och data för att testa, avkommentera det man vill testa.
 
 
@@ -103,19 +103,20 @@ internal class Program
 
         #region ORDER CRUD TESTER
 
-        //OrderRepository orderRepository = new OrderRepository(connectionString);
-        //Order order = new Order()
-        //{
-        //    Ordernr = 1001,
-        //    ÄrSkickad = false,
-        //    ÄrLevererad = false,
-        //    ÄrBetald = false,
-        //    Betalsystem = "Swish",
-        //    TidVidBeställning = DateTime.Now,
-        //    BeräknadLeverans = DateTime.Now.AddDays(5),
-        //    Kund2KontaktID = 1,
-        //    ID = 5
-        //};
+        OrderRepository orderRepository = new OrderRepository(connectionString);
+        Order order = new Order()
+        {
+            Ordernr = 1001,
+            ÄrSkickad = true,
+            ÄrLevererad = false,
+            ÄrBetald = true,
+            Betalsystem = "Swish",
+            TidVidBeställning = DateTime.Now,
+            BeräknadLeverans = DateTime.Now.AddDays(5),
+            Kund2KontaktID = 1,
+            ID = 5
+            
+        };
 
         //// (CREATE) Test för att lägga till ny Order
         //TEST_ORDER.AddOrder(orderRepository, order);
@@ -126,8 +127,8 @@ internal class Program
         //// (READ) Test för att hämta samtliga Ordrar
         //TEST_ORDER.GetOrders(orderRepository);
 
-        //// (UPDATE) Test för att uppdatera en Order
-        //TEST_ORDER.UpdateOrder(orderRepository, order);
+        // (UPDATE) Test för att uppdatera en Order
+        TEST_ORDER.UpdateOrder(orderRepository, order);
 
         //// (DELETE) Test för att deletea en Order
         //TEST_ORDER.DeleteOrderByID(orderRepository, 20);

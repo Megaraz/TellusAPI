@@ -40,6 +40,8 @@ public class Order
     public DateTime BeräknadLeverans { get; set; }
     public int Kund2KontaktID { get; set; }
 
-    public override string ToString() =>
-        $"ID: {ID}, Ordernr: {Ordernr}, ÄrSkickad: {ÄrSkickad}, ÄrLevererad: {ÄrLevererad}, ÄrBetald: {ÄrBetald}, TidVidBeställning: {TidVidBeställning}, BeräknadLeverans: {BeräknadLeverans}";
+    public override string ToString()
+    {
+        return $"ID: {ID}, Ordernr: {Ordernr}, ÄrSkickad: {ÄrSkickad}, ÄrLevererad: {ÄrLevererad}, ÄrBetald: {ÄrBetald}, Betalsysten: {Betalsystem}, TidVidBeställning: {TidVidBeställning}, BeräknadLeverans: {BeräknadLeverans}";
+    }
 }
