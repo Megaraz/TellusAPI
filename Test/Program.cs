@@ -74,15 +74,15 @@ internal class Program
 
         #region ADRESS CRUD TESTER
 
-        //AdressRepository adressRepository = new AdressRepository(connectionString);
-        //Adress adress = new Adress()
-        //{
-        //    Gatuadress = "Strandvägen 5 C",
-        //    Ort = "Ljungskile",
-        //    Postnr = "459 32",
-        //    LghNummer = null,
-        //    ID = 5
-        //};
+        AdressRepository adressRepository = new AdressRepository(connectionString);
+        Adress adress = new Adress()
+        {
+            Gatuadress = "Strandvägen 5 C",
+            Ort = "Kungälv",
+            Postnr = "459 32",
+            LghNummer = null,
+            ID = 5
+        };
 
         //// (CREATE) Test för att lägga till ny Adress.
         //TEST_ADRESS.AddAdress(adressRepository, adress);
@@ -103,20 +103,19 @@ internal class Program
 
         #region ORDER CRUD TESTER
 
-        OrderRepository orderRepository = new OrderRepository(connectionString);
-        Order order = new Order()
-        {
-            Ordernr = 1001,
-            ÄrSkickad = true,
-            ÄrLevererad = false,
-            ÄrBetald = true,
-            Betalsystem = "Swish",
-            TidVidBeställning = DateTime.Now,
-            BeräknadLeverans = DateTime.Now.AddDays(5),
-            Kund2KontaktID = 1,
-            ID = 5
-            
-        };
+        //OrderRepository orderRepository = new OrderRepository(connectionString);
+        //Order order = new Order()
+        //{
+        //    ÄrSkickad = false,
+        //    ÄrLevererad = false,
+        //    ÄrBetald = true,
+        //    Betalsystem = "Swish",
+        //    TidVidBeställning = DateTime.Now,
+        //    BeräknadLeverans = DateTime.Now.AddDays(5),
+        //    Kund2KontaktID = 1,
+        //    ID = 5
+
+        //};
 
         //// (CREATE) Test för att lägga till ny Order
         //TEST_ORDER.AddOrder(orderRepository, order);
@@ -127,8 +126,8 @@ internal class Program
         //// (READ) Test för att hämta samtliga Ordrar
         //TEST_ORDER.GetOrders(orderRepository);
 
-        // (UPDATE) Test för att uppdatera en Order
-        TEST_ORDER.UpdateOrder(orderRepository, order);
+        //// (UPDATE) Test för att uppdatera en Order
+        //TEST_ORDER.UpdateOrder(orderRepository, order);
 
         //// (DELETE) Test för att deletea en Order
         //TEST_ORDER.DeleteOrderByID(orderRepository, 20);

@@ -122,7 +122,7 @@ public class KontaktuppgiftRepository
             throw new ArgumentException($"Ingen kontaktuppgift med ID {kontaktuppgift.ID} hittades i databasen\n\n");
         }
 
-        _genericRepo.Update(kontaktuppgift, UpdateKontaktuppgiftParameters, "UpdateKontaktuppgift");
+        _genericRepo.Update(kontaktuppgift, UpdateKontaktuppgiftParameters, null, "UpdateKontaktuppgift");
     }
     #endregion
     #region DELETE Metod

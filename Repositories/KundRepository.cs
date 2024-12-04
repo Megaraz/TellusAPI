@@ -134,7 +134,7 @@ public class KundRepository
             throw new ArgumentException($"Ingen kund med ID {kund.ID} hittades i databasen. \n\n");
         }
 
-        _genericRepo.Update(kund, UpdateKundParameters, "UpdateKund");
+        _genericRepo.Update(kund, UpdateKundParameters, null, "UpdateKund");
 
     }
     #endregion

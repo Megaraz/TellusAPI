@@ -116,7 +116,7 @@ public class GenericRepository<T> where T : class, new()
     /// <param name="entity"></param>
     /// <param name="updateParameters"></param>
     /// <param name="procedureName"></param>
-    public void Update(T entity, Action<SqlCommand, T> updateParameters, string procedureName)
+    public void Update(T entity, Action<SqlCommand, T> updateParameters, Action<SqlCommand, T>? handleOutPut, string procedureName)
     {
         using SqlConnection connection = new SqlConnection(_connectionString);
         connection.Open();
@@ -127,7 +127,11 @@ public class GenericRepository<T> where T : class, new()
         };
 
         updateParameters.Invoke(command, entity);
+
         command.ExecuteNonQuery();
+
+        handleOutPut?.Invoke(command, entity);
+
     }
 
     /// <summary>

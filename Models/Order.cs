@@ -10,7 +10,7 @@ namespace Models;
 /// </summary>
 public class Order
 {
-    public Order(int ordernr, bool ärSkickad, bool ärLevererad, bool ärBetald, DateTime tidVidBeställning, DateTime beräknadLeverans, int kund2KontaktID, string? betalsystem = null, int id = -1)
+    public Order(bool ärSkickad, bool ärLevererad, bool ärBetald, DateTime tidVidBeställning, DateTime beräknadLeverans, int kund2KontaktID, string? betalsystem = null, int id = -1, int ordernr = -1)
     {
         ID = id;
         Ordernr = ordernr;
@@ -31,7 +31,7 @@ public class Order
     }
 
     public int ID { get; set; } = -1;
-    public int Ordernr { get; set; }
+    public int Ordernr { get; set; } = -1;
     public bool ÄrSkickad { get; set; }
     public bool ÄrLevererad { get; set; }
     public bool ÄrBetald { get; set; }

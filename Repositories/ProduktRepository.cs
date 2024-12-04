@@ -130,7 +130,7 @@ public class ProduktRepository
             throw new ArgumentException($"Ingen produkt med ID {produkt.ID} hittades i databasen.\n\n");
         }
 
-        _genericRepo.Update(produkt, UpdateProduktParameters, "UpdateProdukt");
+        _genericRepo.Update(produkt, UpdateProduktParameters, null, "UpdateProdukt");
     }
     #endregion
 

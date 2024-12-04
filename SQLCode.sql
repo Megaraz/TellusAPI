@@ -118,6 +118,11 @@ values
     (1003, 6), (1004, 7), (1004, 8), (1005, 9), (1005, 10)
 go
 
+create sequence OrdernrSequence
+start with 10000
+increment by 1
+go
+
 create table [Order]
 (
 	ID int identity primary key,
@@ -350,10 +355,7 @@ begin
 end
 go
 
-create sequence OrdernrSequence
-start with 10000
-increment by 1
-go
+
 
 create procedure AddOrder
 (
@@ -365,10 +367,12 @@ create procedure AddOrder
     @BeräknadLeverans datetime,
     @Kund2KontaktID int,
 
-    @ID int output
+    @ID int output,
+    @Ordernr int output
 )
 as
 begin
+    declare @GeneratedOrdernr int = next value for OrdernrSequence;
     insert into 
         [Order] 
         (
@@ -383,7 +387,7 @@ begin
         )
     values 
         (
-            NEXT VALUE FOR OrdernrSequence, 
+            @GeneratedOrdernr, 
             @ÄrSkickad, 
             @ÄrLevererad, 
             @ÄrBetald, 
@@ -395,6 +399,8 @@ begin
 
     set 
         @ID = SCOPE_IDENTITY();
+    set
+        @Ordernr = @GeneratedOrdernr;
 end
 go
 
@@ -407,7 +413,9 @@ create procedure UpdateOrder
     @Betalsystem nvarchar(32),
     @TidVidBeställning datetime,
     @BeräknadLeverans datetime,
-    @Kund2KontaktID int
+    @Kund2KontaktID int,
+
+    @Ordernr int output
 )
 as
 begin
@@ -423,6 +431,8 @@ begin
         Kund2KontaktID = @Kund2KontaktID
     where 
         ID = @ID;
+    set
+        @Ordernr = (select Ordernr from [Order] where ID = @ID);
 end
 go
 

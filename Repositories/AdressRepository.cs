@@ -129,7 +129,7 @@ public class AdressRepository
         {
             throw new ArgumentException($"Ingen adress med ID {adress.ID} hittades i databasen.\n\n");
         }
-        _genericRepo.Update(adress, UpdateAdressParameters, "UpdateAdress");
+        _genericRepo.Update(adress, UpdateAdressParameters, null, "UpdateAdress");
     }
     #endregion
     #region DELETE Metod

@@ -29,7 +29,6 @@ public class OrderRepository
     public void AddOrderParameters(SqlCommand command, Order order)
     {
         // In-parameters
-        command.Parameters.Add("@Ordernr", SqlDbType.Int).Value = order.Ordernr;
         command.Parameters.Add("@ÄrSkickad", SqlDbType.Bit).Value = order.ÄrSkickad;
         command.Parameters.Add("@ÄrLevererad", SqlDbType.Bit).Value = order.ÄrLevererad;
         command.Parameters.Add("@ÄrBetald", SqlDbType.Bit).Value = order.ÄrBetald;
@@ -40,6 +39,7 @@ public class OrderRepository
 
         // Out-parameter
         command.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
+        command.Parameters.Add("@Ordernr", SqlDbType.Int).Direction = ParameterDirection.Output;
     }
     /// <summary>
     /// Hanterar output värdet för "ID" från SQL och tilldelar till Order instansen.
@@ -48,6 +48,7 @@ public class OrderRepository
     /// <param name="order"></param>
     public void HandleOutPutOrder(SqlCommand command, Order order)
     {
+        order.Ordernr = (int)command.Parameters["@Ordernr"].Value;
         order.ID = (int)command.Parameters["@ID"].Value;
     }
     /// <summary>
@@ -78,7 +79,6 @@ public class OrderRepository
     public static Order MapToOrder(SqlDataReader reader)
     {
         return new Order(
-            reader.GetInt32(reader.GetOrdinal("Ordernr")),
             reader.GetBoolean(reader.GetOrdinal("ÄrSkickad")),
             reader.GetBoolean(reader.GetOrdinal("ÄrLevererad")),
             reader.GetBoolean(reader.GetOrdinal("ÄrBetald")),
@@ -86,7 +86,8 @@ public class OrderRepository
             reader.GetDateTime(reader.GetOrdinal("BeräknadLeverans")),
             reader.GetInt32(reader.GetOrdinal("Kund2KontaktID")),
             reader.IsDBNull("Betalsystem") ? null : reader.GetString(reader.GetOrdinal("Betalsystem")),
-            reader.GetInt32(reader.GetOrdinal("ID"))
+            reader.GetInt32(reader.GetOrdinal("ID")),
+            reader.GetInt32(reader.GetOrdinal("Ordernr"))
         );
     }
     /// <summary>
@@ -116,8 +117,8 @@ public class OrderRepository
     /// <param name="order"></param>
     public static void UpdateOrderParameters(SqlCommand command, Order order)
     {
+        // Input-parameter
         command.Parameters.Add("@ID", SqlDbType.Int).Value = order.ID;
-        command.Parameters.Add("@Ordernr", SqlDbType.Int).Value = order.Ordernr;
         command.Parameters.Add("@ÄrSkickad", SqlDbType.Bit).Value = order.ÄrSkickad;
         command.Parameters.Add("@ÄrLevererad", SqlDbType.Bit).Value = order.ÄrLevererad;
         command.Parameters.Add("@ÄrBetald", SqlDbType.Bit).Value = order.ÄrBetald;
@@ -125,6 +126,9 @@ public class OrderRepository
         command.Parameters.Add("@TidVidBeställning", SqlDbType.DateTime).Value = order.TidVidBeställning;
         command.Parameters.Add("@BeräknadLeverans", SqlDbType.DateTime).Value = order.BeräknadLeverans;
         command.Parameters.Add("@Kund2KontaktID", SqlDbType.Int).Value = order.Kund2KontaktID;
+
+        // Output-parameter
+        command.Parameters.Add("@Ordernr", SqlDbType.Int).Direction = ParameterDirection.Output;
     }
     /// <summary>
     /// Updaterar en specifik Order post i Tellus DB utifrån giltigt ID, genom GenericRepository och via Stored Procedure "UpdateOrder"
@@ -143,7 +147,11 @@ public class OrderRepository
         }
 
 
-        _genericRepo.Update(order, UpdateOrderParameters, "UpdateOrder");
+        _genericRepo.Update(order, UpdateOrderParameters, HandleOutPutOrder, "UpdateOrder");
+
+
+
+
     }
     #endregion
 
