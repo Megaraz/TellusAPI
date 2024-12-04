@@ -520,7 +520,9 @@ go
 create procedure AddKund2Adress
 (
     @KundID int,
-    @AdressID int
+    @AdressID int,
+    
+    @ID int output
 )
 as
 begin
@@ -528,6 +530,9 @@ begin
         Kund2Adress (KundID, AdressID)
     values
         (@KundID, @AdressID)
+    set 
+        @ID = SCOPE_IDENTITY();
+        
 end
 go
 
@@ -610,6 +615,85 @@ as
     end
 go
 
+create procedure AddProdukt2Order
+(
+    @ProduktID int,
+    @OrderID int,
+    @Antal int,
+
+    @ID int output
+)
+as
+begin
+    insert into 
+        Produkter2Order (ProduktID, OrderID, Antal)
+    values
+        (@ProduktID, @OrderID, @Antal);
+
+    set 
+        @ID = SCOPE_IDENTITY();
+end
+go
+
+create procedure GetProdukterByOrderID
+(
+    @OrderID int
+)
+as
+begin
+    select
+        p2o.ID,
+        p2o.ProduktID,
+        p2o.OrderID,
+        p2o.Antal,
+        p.Produktnamn,
+        p.Pris,
+        o.Ordernr
+    from
+        Produkter2Order as p2o
+    join 
+        Produkter as p on 
+        p2o.ProduktID = p.ID
+    join
+        [Order] as o on
+        p2o.OrderID = o.ID
+    where
+        p2o.OrderID = @OrderID
+end
+go
+
+create procedure UpdateProdukt2Order
+(
+    @ID int,
+    @ProduktID int,
+    @OrderID int,
+    @Antal int
+)
+as
+begin
+    update 
+        Produkter2Order
+    set 
+        ProduktID = @ProduktID,
+        OrderID = @OrderID,
+        Antal = @Antal
+    where 
+        ID = @ID
+end
+go
+
+create procedure DeleteProdukt2Order
+(
+    @ID int
+)
+as
+begin
+    delete from 
+        Produkter2Order
+    where 
+        ID = @ID
+end
+go
 
     
     
