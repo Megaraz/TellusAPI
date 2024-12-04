@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Repositories;
 
 namespace Test;
+/// <summary>
+/// Innehåller alla metoder för att testa AdressRepo i KonsolAppen(Program)
+/// </summary>
 static class TEST_ADRESS
 {
     public static void UpdateAdress(AdressRepository adressRepository, Adress adress)

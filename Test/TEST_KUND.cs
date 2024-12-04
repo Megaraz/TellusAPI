@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Repositories;
 
 namespace Test;
+/// <summary>
+/// Innehåller alla metoder för att testa KundRepo i KonsolAppen(Program)
+/// </summary>
 static class TEST_KUND
 {
 

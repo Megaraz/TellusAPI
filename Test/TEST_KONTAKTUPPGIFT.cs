@@ -3,6 +3,9 @@ using Models;
 using Repositories;
 
 namespace Test;
+/// <summary>
+/// Innehåller alla metoder för att testa KontaktuppgiftRepo i KonsolAppen(Program)
+/// </summary>
 static class TEST_KONTAKTUPPGIFT
 {
     public static void UpdateKontaktuppgift(KontaktuppgiftRepository kontaktuppgiftRepository, Kontaktuppgift kontaktuppgift)

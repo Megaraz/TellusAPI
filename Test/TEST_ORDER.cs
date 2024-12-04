@@ -3,6 +3,9 @@ using Models;
 using Repositories;
 
 namespace Test;
+/// <summary>
+/// Innehåller alla metoder för att testa OrderRepo i KonsolAppen(Program)
+/// </summary>
 static class TEST_ORDER
 {
     public static void UpdateOrder(OrderRepository orderRepository, Order order)

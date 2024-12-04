@@ -3,6 +3,9 @@ using Models;
 using Repositories;
 
 namespace Test;
+/// <summary>
+/// Innehåller alla metoder för att testa ProduktRepo i KonsolAppen(Program)
+/// </summary>
 static class TEST_PRODUKT
 {
     public static void UpdateProdukt(ProduktRepository produktRepository, Produkt produkt)
