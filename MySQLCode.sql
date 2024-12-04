@@ -240,7 +240,8 @@ go
 
 select
     a.*,
-    k.Förnamn
+    '---',
+    k.*
 from
     Adresser as a
 join 
@@ -249,9 +250,35 @@ join
 join
     Kunder as k on
     k2a.KunderID = k.ID
-where
-    k.id = 1025;
-    
+go
+
+
+select
+    *
+from
+    Kunder
+order by
+    ID
+
+drop table
+    Adresser
+drop table
+    Kund2Adress
+
+
+truncate table Kunder
+go
+
+drop database Tellus
+
+
+drop table Produkter2Order
+
+
+select * from Produkter
+
+select * from [Order]
+
 
 
 
