@@ -47,32 +47,40 @@ internal class Program
         //TEST_KUND.DeleteKundByID(kundRepository, 1009);
         #endregion
 
-        #region KONTAKTUPPGIFT CRUD TESTER
+        #region KUND2ADRESS CRUD TESTER
 
-        //KontaktuppgiftRepository kontaktuppgiftRepository = new KontaktuppgiftRepository(connectionString);
-        //Kontaktuppgift kontaktuppgift = new Kontaktuppgift()
-        //{
-        //    Kontakttyp = "E-post",
-        //    Kontaktvärde = "blabla@example.com",
-        //    ID = 5
-        //};
+        // Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
 
-        //// (CREATE) Test för att lägga till ny Kontaktuppgift
-        //TEST_KONTAKTUPPGIFT.AddKontaktuppgift(kontaktuppgiftRepository, kontaktuppgift);
+        // Kund2Adress kund2Adress = new Kund2Adress()
+        // {
+        //     ID = 1,
+        //     KundID = 1001, // Existerande KundID
+        //     AdressID = 1   // Existerande AdressID
+        // };
 
-        //// (READ) Test för att hämta Kontaktuppgift by ID
-        //TEST_KONTAKTUPPGIFT.GetKontaktuppgiftByID(kontaktuppgiftRepository, 5);
 
-        //// (READ) Test för att hämta samtliga Kontaktuppgifter
-        //TEST_KONTAKTUPPGIFT.GetKontaktuppgifter(kontaktuppgiftRepository);
+        //// (CREATE) Test för att lägga till en relation mellan Kund och Adress, fyll i fält ovanför.
+        // TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
 
-        //// (UPDATE) Test för att uppdatera en Kontaktuppgift
-        //TEST_KONTAKTUPPGIFT.UpdateKontaktuppgift(kontaktuppgiftRepository, kontaktuppgift);
 
-        //// (DELETE) Test för att deletea en Kontaktuppgift
-        //TEST_KONTAKTUPPGIFT.DeleteKontaktuppgiftByID(kontaktuppgiftRepository, 5);
+        //// (READ) Test för att hämta adresser kopplade till en kund
+        // TEST_KUND2ADRESS.GetAdresserByKundID(kund2AdressRepository, 1001);
+
+
+        //// (READ) Test för att hämta kunder kopplade till en adress
+        // TEST_KUND2ADRESS.GetKunderByAdressID(kund2AdressRepository, 1);
+
+
+        //// (UPDATE) Test för att uppdatera en relation mellan Kund och Adress
+        // kund2Adress.AdressID = 2; // Exempel på ny AdressID
+        // TEST_KUND2ADRESS.UpdateKund2Adress(kund2AdressRepository, kund2Adress);
+
+
+        //// (DELETE) Test för att ta bort en relation mellan Kund och Adress
+        // TEST_KUND2ADRESS.DeleteKund2Adress(kund2AdressRepository, 1);
 
         #endregion
+
 
         #region ADRESS CRUD TESTER
 
@@ -100,6 +108,33 @@ internal class Program
 
         //// (DELETE) Test för att deletea en Adress
         //TEST_ADRESS.DeleteAdressByID(adressRepository, 7);
+
+        #endregion
+
+        #region KONTAKTUPPGIFT CRUD TESTER
+
+        //KontaktuppgiftRepository kontaktuppgiftRepository = new KontaktuppgiftRepository(connectionString);
+        //Kontaktuppgift kontaktuppgift = new Kontaktuppgift()
+        //{
+        //    Kontakttyp = "E-post",
+        //    Kontaktvärde = "blabla@example.com",
+        //    ID = 5
+        //};
+
+        //// (CREATE) Test för att lägga till ny Kontaktuppgift
+        //TEST_KONTAKTUPPGIFT.AddKontaktuppgift(kontaktuppgiftRepository, kontaktuppgift);
+
+        //// (READ) Test för att hämta Kontaktuppgift by ID
+        //TEST_KONTAKTUPPGIFT.GetKontaktuppgiftByID(kontaktuppgiftRepository, 5);
+
+        //// (READ) Test för att hämta samtliga Kontaktuppgifter
+        //TEST_KONTAKTUPPGIFT.GetKontaktuppgifter(kontaktuppgiftRepository);
+
+        //// (UPDATE) Test för att uppdatera en Kontaktuppgift
+        //TEST_KONTAKTUPPGIFT.UpdateKontaktuppgift(kontaktuppgiftRepository, kontaktuppgift);
+
+        //// (DELETE) Test för att deletea en Kontaktuppgift
+        //TEST_KONTAKTUPPGIFT.DeleteKontaktuppgiftByID(kontaktuppgiftRepository, 5);
 
         #endregion
 
@@ -164,7 +199,6 @@ internal class Program
         //TEST_PRODUKT.DeleteProduktByID(produktRepository, 5);
 
         #endregion
-
     }
 
 

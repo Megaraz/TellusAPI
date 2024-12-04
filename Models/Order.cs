@@ -10,7 +10,7 @@ namespace Models;
 /// </summary>
 public class Order
 {
-    public Order(bool ärSkickad, bool ärLevererad, bool ärBetald, DateTime tidVidBeställning, DateTime beräknadLeverans, int kund2KontaktID, string? betalsystem = null, int id = -1, int ordernr = -1)
+    public Order(bool ärSkickad, bool ärLevererad, bool ärBetald, DateTime tidVidBeställning, DateTime beräknadLeverans, int kundID, string? betalsystem = null, int id = -1, int ordernr = -1)
     {
         ID = id;
         Ordernr = ordernr;
@@ -20,7 +20,7 @@ public class Order
         Betalsystem = betalsystem;
         TidVidBeställning = tidVidBeställning;
         BeräknadLeverans = beräknadLeverans;
-        Kund2KontaktID = kund2KontaktID;
+        KundID = kundID;
     }
     /// <summary>
     /// Tom Constructor för att kunna användas i Generiska Repositoryn
