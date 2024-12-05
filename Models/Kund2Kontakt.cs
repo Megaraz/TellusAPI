@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Kund2Kontakt
+/// </summary>
 public class Kund2Kontakt
 {
     public int ID { get; set; } = -1;

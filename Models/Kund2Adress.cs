@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Kund2Adress
+/// </summary>
 public class Kund2Adress
 {
     public int ID { get; set; } = -1;

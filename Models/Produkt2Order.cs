@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace Models;
+/// <summary>
+/// Klass som representerar 1 post i tabellen Produkt2Order
+/// </summary>
 public class Produkt2Order
 {
     public int ID { get; set; } = -1;
