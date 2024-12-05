@@ -10,6 +10,7 @@ public class KontaktuppgiftRepository
 {
     private readonly string _connectionString;
     private GenericRepository<Kontaktuppgift> _genericRepo;
+
     /// <summary>
     /// Constructorn tar in connectionstring och instansierar en ny GenericRepository för Kontaktuppgift klassen.
     /// </summary>
@@ -19,7 +20,8 @@ public class KontaktuppgiftRepository
         _connectionString = connectionString;
         _genericRepo = new GenericRepository<Kontaktuppgift>(_connectionString);
     }
-    #region CREATE Metoder
+
+    #region CREATE
     /// <summary>
     /// Tar in parametrar för Add(CREATE) Metoden
     /// </summary>
@@ -52,7 +54,8 @@ public class KontaktuppgiftRepository
         _genericRepo.AddEntity(kontaktuppgift, AddKontaktuppgiftParameters, HandleOutPutKontaktuppgift, "AddKontaktuppgift");
     }
     #endregion
-    #region READ Metoder
+
+    #region READ
     /// <summary>
     /// Tar in parametrar (ID) för Get(READ) metoden
     /// </summary>
@@ -94,7 +97,7 @@ public class KontaktuppgiftRepository
     }
     #endregion
 
-    #region UPDATE Metoder
+    #region UPDATE
     /// <summary>
     /// Tar in parametrar som skall uppdateras i UpdateKontaktuppgift metoden.
     /// </summary>
@@ -116,7 +119,8 @@ public class KontaktuppgiftRepository
          _genericRepo.Update(kontaktuppgift, UpdateKontaktuppgiftParameters, null, "UpdateKontaktuppgift");
     }
     #endregion
-    #region DELETE Metod
+
+    #region DELETE
     /// <summary>
     /// Deletar en specifik Kontaktuppgift post i Tellus DB utifrån ID, genom GenericRepository och via Stored Procedure "CascadeDeleteKontaktuppgift"
     /// </summary>
