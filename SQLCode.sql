@@ -719,6 +719,7 @@ create procedure GetKontaktuppgifterByKundID
 as
 begin
     select
+        k2k.ID,
         k2k.KundID,
         k.Personnr, k.Förnamn, k.Efternamn,
         k2k.KontaktuppgiftID,
@@ -736,6 +737,9 @@ begin
 end
 go
 
+exec GetKontaktuppgifterByKundID @KundID = 1001
+go
+
 create procedure GetKunderByKontaktuppgiftID
 (
     @KontaktuppgiftID int
@@ -743,6 +747,7 @@ create procedure GetKunderByKontaktuppgiftID
 as
 begin
     select
+        k2k.ID,
         k2k.KundID,
         k.Personnr, k.Förnamn, k.Efternamn,
         k2k.KontaktuppgiftID, 
@@ -790,6 +795,7 @@ begin
         ID = @ID;
 end
 go
+
 
     
 

@@ -12,8 +12,8 @@ public class Kund2Kontakt
 
     public override string ToString()
     {
-        return $"ID: {ID}, KundID: {KundID}, KontaktuppgiftID: {KontaktuppgiftID}, " +
-               $"Kund: {(Kund != null ? $"{Kund.Förnamn} {Kund.Efternamn}" : "Ingen Kund")}, " +
-               $"Kontaktuppgift: {(Kontaktuppgift != null ? $"{Kontaktuppgift.Kontakttyp}: {Kontaktuppgift.Kontaktvärde}" : "Ingen Kontaktuppgift")}";
+        return $"Kund2KontaktID: {ID}" +
+               $"\nKund: {(Kund != null ? $"{Kund}" : "Ingen Kund")} " +
+               $"\nKontaktuppgift: {(Kontaktuppgift != null ? $"{Kontaktuppgift}\n" : "Ingen Kontaktuppgift\n")}";
     }
 }

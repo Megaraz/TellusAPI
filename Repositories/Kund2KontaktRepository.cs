@@ -40,7 +40,16 @@ public class Kund2KontaktRepository
 
         command.ExecuteNonQuery();
 
+        // Tilldela ID till relationen
         kund2Kontakt.ID = (int)command.Parameters["@ID"].Value;
+
+        KundRepository kundRepo = new KundRepository(_connectionString);
+        KontaktuppgiftRepository kontaktuppgiftRepo = new KontaktuppgiftRepository(_connectionString);
+
+        // Hämta relaterade data och tilldela
+        kund2Kontakt.Kund = kundRepo.GetKundByID(kund2Kontakt.KundID);
+        kund2Kontakt.Kontaktuppgift = kontaktuppgiftRepo.GetKontaktuppgiftByID(kund2Kontakt.KontaktuppgiftID);
+
     }
     #endregion
 
@@ -58,11 +67,14 @@ public class Kund2KontaktRepository
         connection.Open();
 
         using SqlCommand command = connection.CreateCommand();
+
         command.CommandType = CommandType.StoredProcedure;
         command.CommandText = "GetKontaktuppgifterByKundID";
+
         command.Parameters.Add("@KundID", SqlDbType.Int).Value = kundID;
 
         using SqlDataReader reader = command.ExecuteReader();
+
         while (reader.Read())
         {
             Kund kund = new Kund
@@ -75,7 +87,7 @@ public class Kund2KontaktRepository
 
             Kontaktuppgift kontaktuppgift = new Kontaktuppgift
             {
-                ID = reader.GetInt32(reader.GetOrdinal("KontaktuppgifterID")),
+                ID = reader.GetInt32(reader.GetOrdinal("KontaktuppgiftID")),
                 Kontakttyp = reader.GetString(reader.GetOrdinal("Kontakttyp")),
                 Kontaktvärde = reader.GetString(reader.GetOrdinal("Kontaktvärde"))
             };
@@ -124,7 +136,7 @@ public class Kund2KontaktRepository
 
             Kontaktuppgift kontaktuppgift = new Kontaktuppgift
             {
-                ID = reader.GetInt32(reader.GetOrdinal("KontaktuppgifterID")),
+                ID = reader.GetInt32(reader.GetOrdinal("KontaktuppgiftID")),
                 Kontakttyp = reader.GetString(reader.GetOrdinal("Kontakttyp")),
                 Kontaktvärde = reader.GetString(reader.GetOrdinal("Kontaktvärde"))
             };
@@ -163,6 +175,13 @@ public class Kund2KontaktRepository
         command.Parameters.Add("@KontaktuppgiftID", SqlDbType.Int).Value = kund2Kontakt.KontaktuppgiftID;
 
         command.ExecuteNonQuery();
+
+        KundRepository kundRepo = new KundRepository(_connectionString);
+        KontaktuppgiftRepository kontaktuppgiftRepo = new KontaktuppgiftRepository(_connectionString);
+
+        // Hämta relaterade data och tilldela
+        kund2Kontakt.Kund = kundRepo.GetKundByID(kund2Kontakt.KundID);
+        kund2Kontakt.Kontaktuppgift = kontaktuppgiftRepo.GetKontaktuppgiftByID(kund2Kontakt.KontaktuppgiftID);
     }
     #endregion
 
@@ -183,6 +202,8 @@ public class Kund2KontaktRepository
         command.Parameters.Add("@ID", SqlDbType.Int).Value = id;
 
         command.ExecuteNonQuery();
+
+
     }
     #endregion
 }

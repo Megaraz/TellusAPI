@@ -11,7 +11,8 @@ internal class Program
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Tellus;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
-        // Regioner nedan innehåller metoder och data för att testa, avkommentera det man vill testa.
+        // Har inte skapat en komplett konsolapplikation som man kan testa allt samtidigt i.
+        // Regioner nedan innehåller metoder och data för att testa, avkommentera det man vill testa och sedan kör.
 
 
         #region KUND CRUD TESTER
@@ -21,7 +22,7 @@ internal class Program
         //Kund kund = new Kund()
         //{
         //    ID = 1011,
-        //    Personnr = "19671223-1234",
+        //    Personnr = "19671223-1236",
         //    Förnamn = "Ånkel",
         //    Efternamn = "Kånkel",
         //};
@@ -32,7 +33,7 @@ internal class Program
 
 
         //// (READ) Test för att hämta kund by ID
-        //TEST_KUND.GetKundByID(kundRepository, 1009);
+        //TEST_KUND.GetKundByID(kundRepository, 1015);
 
 
         //// (READ) Test för att hämta samtliga kunder
@@ -53,15 +54,15 @@ internal class Program
 
         //Kund2Kontakt kund2Kontakt = new Kund2Kontakt()
         //{
-        //    KundID = 1001,
-        //    KontaktuppgiftID = 1
+        //    KundID = 1005,
+        //    KontaktuppgiftID = 7
         //};
 
         //// (CREATE) Test för att lägga till ny relation mellan kund och kontaktuppgift
         //TEST_KUND2KONTAKT.AddKund2Kontakt(kund2KontaktRepository, kund2Kontakt);
 
         //// (READ) Test för att hämta kontaktuppgifter för en viss kund
-        //TEST_KUND2KONTAKT.GetKontaktuppgifterByKundID(kund2KontaktRepository, 1001);
+        //TEST_KUND2KONTAKT.GetKontaktuppgifterByKundID(kund2KontaktRepository, 1002);
 
         //// (READ) Test för att hämta kunder för en viss kontaktuppgift
         //TEST_KUND2KONTAKT.GetKunderByKontaktuppgiftID(kund2KontaktRepository, 1);
@@ -78,18 +79,18 @@ internal class Program
 
         #region KUND2ADRESS CRUD TESTER
 
-        //Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
+        Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
 
-        //Kund2Adress kund2Adress = new Kund2Adress()
-        //{
-        //    ID = 1,
-        //    KundID = 1002, // Existerande KundID
-        //    AdressID = 4   // Existerande AdressID
-        //};
+        Kund2Adress kund2Adress = new Kund2Adress()
+        {
+            ID = 1,
+            KundID = 1002, // Existerande KundID
+            AdressID = 4   // Existerande AdressID
+        };
 
 
-        //// (CREATE) Test för att lägga till en relation mellan Kund och Adress, fyll i fält ovanför.
-        //TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
+        // (CREATE) Test för att lägga till en relation mellan Kund och Adress, fyll i fält ovanför.
+        TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
 
 
         //// (READ) Test för att hämta adresser kopplade till en kund

@@ -10,8 +10,16 @@ static class TEST_KUND2KONTAKT
 {
     public static void AddKund2Kontakt(Kund2KontaktRepository kund2KontaktRepository, Kund2Kontakt kund2Kontakt)
     {
-        kund2KontaktRepository.AddKund2Kontakt(kund2Kontakt);
-        Console.WriteLine($"{kund2Kontakt}\n\nRelationen har lagts till i databasen.");
+        try
+        {
+            kund2KontaktRepository.AddKund2Kontakt(kund2Kontakt);
+            Console.WriteLine($"{kund2Kontakt}\n\nRelationen har lagts till i databasen.");
+
+        }
+        catch
+        {
+            Console.WriteLine("Finns redan en relation mellan dessa två IDn. Försök igen.");
+        }
     }
 
     public static void GetKontaktuppgifterByKundID(Kund2KontaktRepository kund2KontaktRepository, int kundID)

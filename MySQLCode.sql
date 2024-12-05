@@ -218,3 +218,7 @@ end
 go
 
 exec GetKunderByAdressID @AdressID = 1
+
+select * from Kunder
+
+select * from Kund2Kontakt
