@@ -10,6 +10,7 @@ public class OrderRepository
 {
     private readonly string _connectionString;
     private GenericRepository<Order> _genericRepo;
+
     /// <summary>
     /// Constructorn tar in connectionstring och instansierar en ny GenericRepository för Order klassen.
     /// </summary>
@@ -20,7 +21,7 @@ public class OrderRepository
         _genericRepo = new GenericRepository<Order>(_connectionString);
     }
 
-    #region CREATE Metoder
+    #region CREATE
     /// <summary>
     /// Tar in parametrar för Add(CREATE) Metoden
     /// </summary>
@@ -61,7 +62,7 @@ public class OrderRepository
     }
     #endregion
 
-    #region READ Metoder
+    #region READ
     /// <summary>
     /// Tar in parametrar (ID) för Get(READ) metoden
     /// </summary>
@@ -109,7 +110,8 @@ public class OrderRepository
     }
     #endregion
 
-    #region UPDATE Metoder
+    #region UPDATE
+
     /// <summary>
     /// Tar in parametrar som skall uppdateras i UpdateOrder metoden.
     /// </summary>
@@ -141,7 +143,7 @@ public class OrderRepository
     }
     #endregion
 
-    #region DELETE Metod
+    #region DELETE
     /// <summary>
     /// Deletar en specifik Order post i Tellus DB utifrån ID, genom GenericRepository och via Stored Procedure "CascadeDeleteOrder"
     /// </summary>
