@@ -1,24 +1,25 @@
 use Master
 go
-
+-- ta bort Tellus om man redan har en
 drop database Tellus
 go
+-- Skapar databasen som jag kallar Tellus
 create database Tellus
 go
-
+-- Använd Tellus för allt nedan
 use Tellus
 go
-
+-- Skapar table för Kunder
 create table Kunder
 (
 	ID int identity(1001, 1) primary key,
 	Personnr nvarchar(13) not null,
 	Förnamn nvarchar(32) not null, 
 	Efternamn nvarchar(32) not null,
-	unique(Personnr, Förnamn, Efternamn)
+	unique(Personnr, Förnamn, Efternamn) -- Alla dessa attribut ihop måste vara unika.
 )
 go
-
+-- Lägger till poster med data i Kunder
 insert into 
     Kunder (Personnr, Förnamn, Efternamn)
 values
@@ -33,7 +34,7 @@ values
     ('19970903-0011', 'David', 'Holm'),
     ('19830530-2233', 'Sofia', 'Fransson')
 go
-
+-- Skapar tabellen Adresser
 create table Adresser
 (
 	ID int identity primary key,
@@ -43,7 +44,7 @@ create table Adresser
 	[Lgh nummer] nvarchar(4) null
 )
 go
-
+-- Lägger till poster med data i Adresser
 insert into 
     Adresser (Gatuadress, Ort, Postnr, [Lgh nummer])
 values
@@ -58,16 +59,16 @@ values
     ('Kyrkogatan 9', 'Örebro', '70212', null),
     ('Hamnvägen 6', 'Kalmar', '39122', 'E1')
 go
-
+-- Skapar junctiontable Kund2Adress för många-till-många mellan Kunder och Adresser
 create table Kund2Adress
 (
 	ID int identity primary key,
-	KundID int not null references Kunder(ID) on delete cascade,
-	AdressID int not null references Adresser(ID) on delete cascade,
-	unique(KundID, AdressID)
+	KundID int not null references Kunder(ID) on delete cascade, -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
+	AdressID int not null references Adresser(ID) on delete cascade, -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
+	unique(KundID, AdressID) -- dessa två ihop måste vara unika
 )
 go
-
+-- Skapar (poster)relationer mellan Kunder och Adresser i Kund2Adresser
 insert into
     Kund2Adress(KundID, AdressID)
 values
@@ -76,7 +77,7 @@ values
 go
 
 
-
+-- Skapar Kontaktuppgifter table
 create table Kontaktuppgifter
 (
 	ID int identity primary key,
@@ -85,7 +86,7 @@ create table Kontaktuppgifter
 		
 )
 go
-
+-- Skapar poster med data i Kontaktuppgifter
 insert into
     Kontaktuppgifter(Kontakttyp, Kontaktvärde)
 values
@@ -101,46 +102,46 @@ values
     ('E-post', 'lena.karlsson@example.com')
 go
 
-
+-- Skapar junctiontable Kund2Kontakt för många-till-många relation mellan Kunder och Kontaktuppgifter
 create table Kund2Kontakt
 (
 	ID int identity primary key,
-	KundID int not null references Kunder(ID) on delete cascade,
-	KontaktuppgiftID int not null references Kontaktuppgifter(ID) on delete cascade,
-	unique(KundID, KontaktuppgiftID)
+	KundID int not null references Kunder(ID) on delete cascade, -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
+	KontaktuppgiftID int not null references Kontaktuppgifter(ID) on delete cascade, -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
+	unique(KundID, KontaktuppgiftID) -- dessa två ihop måste vara unika
 )
 go
-
+-- Skapar (poster)relationer mellan Kunder och Kontaktuppgifter
 insert into
     Kund2Kontakt(KundID, KontaktuppgiftID)
 values
     (1001, 1), (1001, 2), (1002, 2), (1002, 3), (1003, 5),
     (1003, 6), (1004, 7), (1004, 8), (1005, 8), (1005, 10)
 go
-
+-- Skapar en sekvens som genererar ett nummer som startar på 1000 och ökar med 1 per gång.
 create sequence OrdernrSequence
 start with 10000
 increment by 1
 go
-
+-- Skapar table för Order, med KundID referens för en-till-många relation(En kund kan ha flera ordrar)
 create table [Order]
 (
 	ID int identity primary key,
 	Ordernr int unique not null,
-	ÄrSkickad BIT not null default 0,
+	ÄrSkickad BIT not null default 0, -- sätter defaultvärden på BIT till 0 explicit även om 0 ofta är default.
 	ÄrLevererad BIT not null default 0,
 	ÄrBetald BIT not null default 0,
 	Betalsystem nvarchar(32) null,
 	TidVidBeställning DateTime not null,
 	BeräknadLeverans DateTime not null,
-	KundID int not null references Kunder(ID) on delete cascade 
+	KundID int not null references Kunder(ID) on delete cascade -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
 )
 go
-
+-- Sätter in poster med data i Order, använder min tidigare skapade Sekvens(OrdernrSequence) för att generera Ordernr
 insert into
     [Order]
 values
-    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Swish', GETDATE(), DATEADD(day, 5, GETDATE()), 1001),
+    (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, 'Swish', GETDATE(), DATEADD(day, 5, GETDATE()), 1001), -- Kan sätta antal dagar för beräknad leverans
     (NEXT VALUE FOR OrdernrSequence, 1, 0, 0, 'Klarna', GETDATE(), DATEADD(day, 3, GETDATE()), 1001),
     (NEXT VALUE FOR OrdernrSequence, 0, 0, 0, null, GETDATE(), DATEADD(day, 7, GETDATE()), 1001),
     (NEXT VALUE FOR OrdernrSequence, 1, 1, 1, 'Kort', GETDATE(), DATEADD(day, 2, GETDATE()), 1004),
@@ -153,17 +154,17 @@ values
 go
 
 
-
+-- Skapar table Produkter
 create table Produkter
 (
 	ID int identity primary key,
 	ProduktTyp nvarchar(16) null,
 	Produktnamn nvarchar(64) not null,
-	ProduktNummer nvarchar(128) unique not null,
+	ProduktNummer nvarchar(128) unique not null, -- Produktnummer måste vara unikt
 	Pris money not null
 )
 go
-
+-- Lägger till poster med data i Produkter
 insert into
     Produkter
 values
@@ -178,17 +179,18 @@ values
     ('Kläder', 'Jacka', 'P009', 1999.99),
     ('Kläder', 'Skor', 'P010', 999.99)
 go
-
+-- Skapar junctiontable Produkt2Order för många-till-många relation mellan Produkter och Order.
+-- Kom på nu i efterhand att det hade räckt med en-till-många(En order kan ha många produkter)
 create table Produkt2Order
 (
 	ID int identity primary key,
 	Antal int not null default 1,
-	ProduktID int not null references Produkter(ID) on delete cascade,
-	[OrderID] int not null references [Order](ID) on delete cascade,
-	unique(ProduktID, [OrderID])
+	ProduktID int not null references Produkter(ID) on delete cascade, -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
+	[OrderID] int not null references [Order](ID) on delete cascade -- on delete cascade tar "automatiskt" bort relaterade poster i alla tabeller.
+	
 )
 go
-
+-- Skapar poster(relation) mellan Produkt och Order
 insert into
     Produkt2Order(ProduktID, OrderID, Antal)
 values
@@ -196,7 +198,7 @@ values
     (6, 6, 3), (7, 7, 1), (8, 8, 1), (9, 9, 1), (10, 10, 1)
 go
 
-
+-- Skapar procedur för att lägga till en Kund i tabellen Kunder
 create procedure AddKund
 	(
 		@Personnr varchar(13),
@@ -212,10 +214,10 @@ as begin
 		(@Personnr, @Förnamn, @Efternamn)
 
 	set
-		@ID = SCOPE_IDENTITY();
+		@ID = SCOPE_IDENTITY(); -- Sätter output parametern @ID till SCOPE_IDENTITY
 end
 go
-
+-- Skapar procedur för Uppdatera en Kundpost i Kunder
 create procedure UpdateKund
 	(
 		@ID int,
@@ -232,7 +234,7 @@ begin
 		Förnamn = @Förnamn,
 		Efternamn = @Efternamn
 	where
-		Kunder.ID = @ID
+		Kunder.ID = @ID -- Condition för vilken post som skall uppdateras
 end
 go
 
@@ -244,16 +246,17 @@ as
 			from
 				Kunder
 			where
-				ID = @ID
+				ID = @ID -- Condition för vilken post som skall deletas i Kunder och cascadea alla relaterade
 	end
 go
-
+-- Skapar procedur för att lägga till en Adress post i Adresser
 create procedure AddAdress
 (
     @Gatuadress nvarchar(32),
     @Ort nvarchar(32),
     @Postnr nvarchar(6),
     @LghNummer nvarchar(4),
+
     @ID int output
 )
 as
@@ -264,11 +267,11 @@ begin
         (@Gatuadress, @Ort, @Postnr, @LghNummer);
 
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter output parametern @ID till SCOPE_IDENTITY
 end
 go
 
-
+-- Skapar procedur för att uppdatera en Adresspost i Adresser
 create procedure UpdateAdress
 (
     @ID int,
@@ -287,7 +290,7 @@ begin
         Postnr = @Postnr,
         [Lgh nummer] = @LghNummer
     where 
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall uppdateras
 end
 go
 
@@ -301,10 +304,11 @@ begin
     delete from 
         Adresser
     where 
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall deletas
 end
 go
 
+-- Skapar procedur för att lägga till en Kontaktuppgift i Kontaktuppgifter
 create procedure AddKontaktuppgift
 (
     @Kontakttyp nvarchar(16),
@@ -319,10 +323,11 @@ begin
         (@Kontakttyp, @Kontaktvärde);
 
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter outparametern @ID till SCOPE_IDENTITY()
 end
 go
 
+-- Skapar procedur för att uppdatera en post i Kontaktuppgifter
 create procedure UpdateKontaktuppgift
 (
     @ID int,
@@ -337,7 +342,7 @@ begin
         Kontakttyp = @Kontakttyp,
         Kontaktvärde = @Kontaktvärde
     where 
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall uppdateras
 end
 go
 
@@ -351,12 +356,12 @@ begin
     delete from 
         Kontaktuppgifter
     where 
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall deletas
 end
 go
 
 
-
+-- Skapar procedur för att lägga till en Order i Order
 create procedure AddOrder
 (
     @ÄrSkickad bit,
@@ -372,7 +377,7 @@ create procedure AddOrder
 )
 as
 begin
-    declare @GeneratedOrdernr int = next value for OrdernrSequence;
+    declare @GeneratedOrdernr int = next value for OrdernrSequence; -- deklarerar en variabel med tilldelat värde via min sekvens OrdernrSequence
     insert into 
         [Order] 
         (
@@ -387,7 +392,7 @@ begin
         )
     values 
         (
-            @GeneratedOrdernr, 
+            @GeneratedOrdernr, -- Sätter Ordernr till @GeneratedOrdernr som då fick ett värde i början via sekvensen.
             @ÄrSkickad, 
             @ÄrLevererad, 
             @ÄrBetald, 
@@ -398,12 +403,13 @@ begin
         );
 
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter out-Parametern @ID till SCOPE_IDENTITY()
     set
-        @Ordernr = @GeneratedOrdernr;
+        @Ordernr = @GeneratedOrdernr; -- Sätter out-parametern @Ordernr till @GeneratedOrdernr
 end
 go
 
+-- Skapar procedur för att uppdatera en Order post
 create procedure UpdateOrder
 (
     @ID int,
@@ -432,11 +438,12 @@ begin
     where 
         ID = @ID;
     set
-        @Ordernr = (select Ordernr from [Order] where ID = @ID);
+        @Ordernr = (select Ordernr from [Order] where ID = @ID); -- SubQuery för att få Ordernr för posten man updaterar.
 end
 go
 
 -- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
+-- Skapar procedur för att deletea en specifik post i Order, och cascade-deletar då "automatiskt"
 create procedure CascadeDeleteOrder
 (
     @ID int
@@ -446,16 +453,18 @@ begin
     delete from 
         [Order]
     where 
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall deletas
 end
 go
 
+-- Skapar procedur för att lägga till en Produkt i Produkter
 create procedure AddProdukt
 (
     @ProduktTyp nvarchar(16),
     @Produktnamn nvarchar(64),
     @ProduktNummer nvarchar(128),
     @Pris money,
+
     @ID int output
 )
 as
@@ -477,16 +486,16 @@ begin
     );
 
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter outparametern @ID till SCOPE_IDENTITY()
 end
 go
 
+-- Skapar procedur för att uppdatera en specifik Produkt i Produkter
 create procedure UpdateProdukt
 (
     @ID int,
     @ProduktTyp nvarchar(16),
     @Produktnamn nvarchar(64),
-    @ProduktNummer nvarchar(128),
     @Pris money
 )
 as
@@ -496,14 +505,14 @@ begin
     set
         ProduktTyp = @ProduktTyp,
         Produktnamn = @Produktnamn,
-        ProduktNummer = @ProduktNummer,
         Pris = @Pris
     where
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall uppdateras
 end
 go
 
 -- Då jag satt "on delete cascade" i själva tabellskapandet så behövs det inte här
+-- Skapar procedur för att deletea en Produkt från Produkter
 create procedure CascadeDeleteProdukt
 (
     @ID int
@@ -513,10 +522,11 @@ begin
     delete from
         Produkter
     where
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall deletas
 end
 go
 
+-- Skapar procedur för att lägga till en post(relation) mellan en Kund och en Adress
 create procedure AddKund2Adress
 (
     @KundID int,
@@ -531,11 +541,12 @@ begin
     values
         (@KundID, @AdressID)
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter out-parametern @ID till SCOPE_IDENTITY()
         
 end
 go
 
+-- Skapar procedur för att få samtliga Adresser som hör till en Kund(ID)
 create procedure GetAdresserByKundID
 (
     @KundID int
@@ -557,10 +568,11 @@ as
             Kunder as k on
             k2a.KundID = k.ID
         where
-            k.ID = @KundID
+            k.ID = @KundID -- Condition för vilken kund som allt ska visas
     end
 go
 
+-- Skapar procedur för att få samtliga Kunder som hör till en Adress(ID)
 create procedure GetKunderByAdressID
 (
     @AdressID int
@@ -582,10 +594,11 @@ begin
             Kunder as k on
             k2a.KundID = k.ID
         where
-            a.ID = @AdressID;
+            a.ID = @AdressID; -- Condition för vilken adress som allt ska visas
 end
 go
 
+-- Skapar procedur för att uppdatera en post(relation) i Kund2Adress
 create procedure UpdateKund2Adress
 (
     @ID int,
@@ -600,11 +613,12 @@ as
             KundID = @KundID,
             AdressID = @AdressID
         where
-            ID = @ID
+            ID = @ID -- Condition för vilken post som skall uppdateras
     end
 go
 
-create procedure CascadeDeleteKund2Adress
+-- Skapar procedur för att deletea en post från Kund2Adress
+create procedure CascadeDeleteKund2Adress -- Då jag satt "on delete cascade" vid table creation så behövs det inte här.
 (
     @ID int
 )
@@ -613,10 +627,11 @@ as
         delete from
             Kund2Adress
         where
-            ID = @ID
+            ID = @ID -- Condition för vilken post som skall deletas
     end
 go
 
+-- Skapar procedur för att lägga till ny (post)relation mellan Produkt och Order, samt antal
 create procedure AddProdukt2Order
 (
     @ProduktID int,
@@ -628,15 +643,16 @@ create procedure AddProdukt2Order
 as
 begin
     insert into 
-        Produkter2Order (ProduktID, OrderID, Antal)
+        Produkt2Order (ProduktID, OrderID, Antal)
     values
         (@ProduktID, @OrderID, @Antal);
 
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter out-parametern @ID till SCOPE_IDENTITY()
 end
 go
 
+-- Skapar procedur för att hämta alla Produkter som hör till en Order
 create procedure GetProdukterByOrderID
 (
     @OrderID int
@@ -652,7 +668,7 @@ begin
         p.Pris,
         o.Ordernr
     from
-        Produkter2Order as p2o
+        Produkt2Order as p2o
     join 
         Produkter as p on 
         p2o.ProduktID = p.ID
@@ -660,10 +676,11 @@ begin
         [Order] as o on
         p2o.OrderID = o.ID
     where
-        p2o.OrderID = @OrderID
+        p2o.OrderID = @OrderID -- Condition för vilken Order som allt ska visas
 end
 go
 
+-- Skapar procedur för att uppdatera en post(relation) i Produkt2Order
 create procedure UpdateProdukt2Order
 (
     @ID int,
@@ -674,16 +691,17 @@ create procedure UpdateProdukt2Order
 as
 begin
     update 
-        Produkter2Order
+        Produkt2Order
     set 
         ProduktID = @ProduktID,
         OrderID = @OrderID,
         Antal = @Antal
     where 
-        ID = @ID
+        ID = @ID -- Condition för vilken post som skall uppdateras
 end
 go
 
+-- Skapar procedur för att deletea en post(relation) från Produkt2Order
 create procedure DeleteProdukt2Order
 (
     @ID int
@@ -691,16 +709,18 @@ create procedure DeleteProdukt2Order
 as
 begin
     delete from 
-        Produkter2Order
+        Produkt2Order
     where 
-        ID = @ID
+        ID = @ID -- Condition för vilken post som skall deletas
 end
 go
 
+-- Skapar procedur för att lägga till en (post)relation mellan Kund och Kontaktuppgift
 create procedure AddKund2Kontakt
 (
     @KundID int,
     @KontaktuppgiftID int,
+
     @ID int output
 )
 as
@@ -710,10 +730,11 @@ begin
     values
         (@KundID, @KontaktuppgiftID);
     set 
-        @ID = SCOPE_IDENTITY();
+        @ID = SCOPE_IDENTITY(); -- Sätter out-parametern @ID till SCOPE_IDENTITY()
 end
 go
 
+-- Skapar procedur för att få alla Kontaktuppgifter som hör till en Kund(ID)
 create procedure GetKontaktuppgifterByKundID
 (
     @KundID int
@@ -735,13 +756,11 @@ begin
         Kunder as k on
         k2k.KundID = k.ID
     where
-        k.ID = @KundID;
+        k.ID = @KundID; -- Condition för vilken Kund allt ska visas
 end
 go
 
-exec GetKontaktuppgifterByKundID @KundID = 1001
-go
-
+-- Skapar procedur för att få alla Kunder som hör till en Kontaktuppgift(ID)
 create procedure GetKunderByKontaktuppgiftID
 (
     @KontaktuppgiftID int
@@ -763,10 +782,11 @@ begin
         Kunder as k on
         k2k.KundID = k.ID
     where
-        ku.ID = @KontaktuppgiftID;
+        ku.ID = @KontaktuppgiftID; -- Condition för vilken Kontaktuppgift allt ska visas
 end
 go
 
+-- Skapar procedur för att uppdatera en post(relation) i Kund2Kontakt
 create procedure UpdateKund2Kontakt
 (
     @ID int,
@@ -781,11 +801,12 @@ begin
         KundID = @KundID,
         KontaktuppgiftID = @KontaktuppgiftID
     where
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall uppdateras
 end
 go
 
-create procedure CascadeDeleteKund2Kontakt
+-- Skapar en procedur för att deletea en post(relation) i Kund2Kontakt
+create procedure CascadeDeleteKund2Kontakt -- Då jag satt "on delete cascade" i table creation behövs det inte här
 (
     @ID int
 )
@@ -794,7 +815,7 @@ begin
     delete from
         Kund2Kontakt
     where
-        ID = @ID;
+        ID = @ID; -- Condition för vilken post som skall deletas
 end
 go
 

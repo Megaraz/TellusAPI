@@ -36,7 +36,15 @@ public class Produkt2OrderRepository
 
         command.ExecuteNonQuery();
 
+        // Tilldela ID till relationen
         produkt2Order.ID = (int)command.Parameters["@ID"].Value;
+
+        ProduktRepository produktRepo = new ProduktRepository(_connectionString);
+        OrderRepository orderRepo = new OrderRepository(_connectionString);
+
+        // Hämta relaterade data och tilldela
+        produkt2Order.Produkt = produktRepo.GetProduktByID(produkt2Order.ProduktID);
+        produkt2Order.Order = orderRepo.GetOrderByID(produkt2Order.OrderID);
     }
     #endregion
 
@@ -108,6 +116,13 @@ public class Produkt2OrderRepository
         command.Parameters.Add("@Antal", SqlDbType.Int).Value = produkt2Order.Antal;
 
         command.ExecuteNonQuery();
+
+        ProduktRepository produktRepo = new ProduktRepository(_connectionString);
+        OrderRepository orderRepo = new OrderRepository(_connectionString);
+
+        // Hämta relaterade data och tilldela
+        produkt2Order.Produkt = produktRepo.GetProduktByID(produkt2Order.ProduktID);
+        produkt2Order.Order = orderRepo.GetOrderByID(produkt2Order.OrderID);
     }
     #endregion
 

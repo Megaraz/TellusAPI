@@ -111,7 +111,6 @@ public class ProduktRepository
         command.Parameters.Add("@ID", SqlDbType.Int).Value = produkt.ID;
         command.Parameters.Add("@ProduktTyp", SqlDbType.NVarChar, 16).Value = produkt.ProduktTyp ?? (object)DBNull.Value;
         command.Parameters.Add("@Produktnamn", SqlDbType.NVarChar, 64).Value = produkt.Produktnamn;
-        command.Parameters.Add("@ProduktNummer", SqlDbType.NVarChar, 128).Value = produkt.ProduktNummer;
         command.Parameters.Add("@Pris", SqlDbType.Money).Value = produkt.Pris;
     }
     /// <summary>

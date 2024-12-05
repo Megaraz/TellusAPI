@@ -15,7 +15,7 @@ internal class Program
         // Regioner nedan innehåller metoder och data för att testa, avkommentera det man vill testa och sedan kör.
 
 
-        #region KUND CRUD TESTER
+        #region KUND TESTER
 
         //KundRepository kundRepository = new KundRepository(connectionString);
 
@@ -48,7 +48,7 @@ internal class Program
         //TEST_KUND.DeleteKundByID(kundRepository, 1009);
         #endregion
 
-        #region KUND2KONTAKT CRUD TESTER
+        #region KUND2KONTAKT TESTER
 
         //Kund2KontaktRepository kund2KontaktRepository = new Kund2KontaktRepository(connectionString);
 
@@ -77,7 +77,7 @@ internal class Program
 
         #endregion
 
-        #region KUND2ADRESS CRUD TESTER
+        #region KUND2ADRESS TESTER
 
         //Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
 
@@ -111,7 +111,7 @@ internal class Program
 
         #endregion
 
-        #region ADRESS CRUD TESTER
+        #region ADRESS TESTER
 
         //AdressRepository adressRepository = new AdressRepository(connectionString);
         //Adress adress = new Adress()
@@ -140,7 +140,7 @@ internal class Program
 
         #endregion
 
-        #region KONTAKTUPPGIFT CRUD TESTER
+        #region K.UPPGIFT TESTER
 
         //KontaktuppgiftRepository kontaktuppgiftRepository = new KontaktuppgiftRepository(connectionString);
         //Kontaktuppgift kontaktuppgift = new Kontaktuppgift()
@@ -167,7 +167,7 @@ internal class Program
 
         #endregion
 
-        #region ORDER CRUD TESTER
+        #region ORDER TESTER
 
         //OrderRepository orderRepository = new OrderRepository(connectionString);
         //Order order = new Order()
@@ -202,14 +202,14 @@ internal class Program
 
         #region PRODUKT2ORDER CRUD TESTER
 
-        //Produkt2OrderRepository produkt2OrderRepository = new Produkt2OrderRepository(connectionString);
+        Produkt2OrderRepository produkt2OrderRepository = new Produkt2OrderRepository(connectionString);
 
-        //Produkt2Order produkt2Order = new Produkt2Order()
-        //{
-        //    ProduktID = 1,
-        //    OrderID = 1,
-        //    Antal = 3
-        //};
+        Produkt2Order produkt2Order = new Produkt2Order()
+        {
+            ProduktID = 1,
+            OrderID = 1,
+            Antal = 3
+        };
 
         //// (CREATE) Test för att lägga till ny relation mellan produkt och order
         //TEST_PRODUKT2ORDER.AddProdukt2Order(produkt2OrderRepository, produkt2Order);
@@ -227,7 +227,7 @@ internal class Program
 
         #endregion
 
-        #region PRODUKT CRUD TESTER
+        #region PRODUKT TESTER
 
         //ProduktRepository produktRepository = new ProduktRepository(connectionString);
         //Produkt produkt = new Produkt()
@@ -235,7 +235,7 @@ internal class Program
         //    ProduktTyp = "Elektronik",
         //    Produktnamn = "Trådlös Mus",
         //    ProduktNummer = "123-456-787",
-        //    Pris = 1999.99m,
+        //    Pris = 2500.0m,
         //    ID = 5
         //};
 
@@ -255,6 +255,8 @@ internal class Program
         //TEST_PRODUKT.DeleteProduktByID(produktRepository, 5);
 
         #endregion
+
+
     }
 
 

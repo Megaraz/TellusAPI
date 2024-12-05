@@ -228,3 +228,5 @@ select * from Adresser
 select * from Kontaktuppgifter
 
 select * from [Order]
+
+select * from Produkter
