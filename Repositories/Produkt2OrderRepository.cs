@@ -3,10 +3,16 @@ using Models;
 using Microsoft.Data.SqlClient;
 
 namespace Repositories;
+/// <summary>
+/// Klass som innehåller service logiken(CRUD) specifikt för Produkt2Order
+/// </summary>
 public class Produkt2OrderRepository
 {
     private readonly string _connectionString;
-
+    /// <summary>
+    /// Construcorn tar in connectionstring
+    /// </summary>
+    /// <param name="connectionString"></param>
     public Produkt2OrderRepository(string connectionString)
     {
         _connectionString = connectionString;

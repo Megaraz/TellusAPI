@@ -78,18 +78,18 @@ internal class Program
 
         #region KUND2ADRESS CRUD TESTER
 
-        // Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
+        //Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
 
-        // Kund2Adress kund2Adress = new Kund2Adress()
-        // {
-        //     ID = 1,
-        //     KundID = 1001, // Existerande KundID
-        //     AdressID = 1   // Existerande AdressID
-        // };
+        //Kund2Adress kund2Adress = new Kund2Adress()
+        //{
+        //    ID = 1,
+        //    KundID = 1002, // Existerande KundID
+        //    AdressID = 4   // Existerande AdressID
+        //};
 
 
         //// (CREATE) Test för att lägga till en relation mellan Kund och Adress, fyll i fält ovanför.
-        // TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
+        //TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
 
 
         //// (READ) Test för att hämta adresser kopplade till en kund

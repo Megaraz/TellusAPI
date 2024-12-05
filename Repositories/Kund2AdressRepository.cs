@@ -41,6 +41,8 @@ public class Kund2AdressRepository
 
         // Out-parameters
         command.Parameters.Add("@ID", SqlDbType.Int).Direction = ParameterDirection.Output;
+        
+
 
         command.ExecuteNonQuery();
 

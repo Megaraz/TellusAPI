@@ -145,7 +145,7 @@ as
     end
 go
 
-exec GetAdresserByKundID @KundID = 1001
+exec GetAdresserByKundID @KundID = 1002
 go
 
 create procedure GetAdresserByKundID
