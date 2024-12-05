@@ -10,6 +10,7 @@ public class KundRepository
 {
     private readonly string _connectionString;
     private readonly GenericRepository<Kund> _genericRepo;
+
     /// <summary>
     /// Constructorn tar in connectionstring och instansierar en ny GenericRepository för Kund klassen.
     /// </summary>
@@ -19,7 +20,8 @@ public class KundRepository
         _connectionString = connectionString;
         _genericRepo = new GenericRepository<Kund>(_connectionString);
     }
-    #region CREATE Metoder
+    #region CREATE
+
     /// <summary>
     /// Tar in parametrar för Add(CREATE) Metoden
     /// </summary>
@@ -57,7 +59,8 @@ public class KundRepository
 
     }
     #endregion
-    #region READ Metoder
+
+    #region READ
     /// <summary>
     /// Tar in parametrar (ID) för Get(READ) metoden
     /// </summary>
@@ -104,7 +107,7 @@ public class KundRepository
     }
     #endregion
 
-    #region UPDATE Metoder
+    #region UPDATE
     /// <summary>
     /// Tar in parametrar som skall uppdateras i UpdateKund metoden.
     /// </summary>
@@ -129,7 +132,7 @@ public class KundRepository
     }
     #endregion
 
-    #region DELETE Metod
+    #region DELETE
     /// <summary>
     /// Deletar en specifik Adress post i Tellus DB utifrån ID, genom GenericRepository och via Stored Procedure "CascadeDeleteKund"
     /// </summary>
@@ -140,5 +143,7 @@ public class KundRepository
 
     }
     #endregion
+
+
 
 }
