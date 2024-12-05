@@ -15,10 +15,15 @@ public class GenericRepository<T> where T : class, new()
 {
     private readonly string _connectionString;
 
+    /// <summary>
+    /// Constructorn tar in connectionstring och tilldelar
+    /// </summary>
+    /// <param name="connectionString"></param>
     public GenericRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
+    #region CREATE
     /// <summary>
     /// Öppnar connection till Tellus DB och lägger till en ny post via Stored Procedure
     /// </summary>
@@ -35,17 +40,21 @@ public class GenericRepository<T> where T : class, new()
         {
             CommandType = CommandType.StoredProcedure
         };
-
-        getInParameters.Invoke(command, entity);
+        
+        
+        getInParameters.Invoke(command, entity); // Här kallar vi på delegaten/metoden
 
         command.ExecuteNonQuery();
 
-        handleOutPut.Invoke(command, entity);
+        
+        handleOutPut.Invoke(command, entity); // Här kallar vi på delegaten/metoden
 
     }
+    #endregion
 
+    #region READ
     /// <summary>
-    /// Öppnar connection till Tellus DB och hämtar samtliga poster för angiven klass(entity)
+    /// Öppnar connection till Tellus DB och hämtar samtliga poster i en lista för angiven klass(entity)
     /// </summary>
     /// <param name="mapToEntity"></param>
     /// <param name="query"></param>
@@ -67,13 +76,12 @@ public class GenericRepository<T> where T : class, new()
 
         while (reader.Read())
         {
-            entities.Add(result = mapToEntity.Invoke(reader));
+            entities.Add(result = mapToEntity.Invoke(reader)); // Här kallar vi på delegaten/metoden
         }
 
         return entities;
 
     }
-
 
     /// <summary>
     /// Öppnar connection till Tellus DB och hämtar en specifik post utifrån angiven ID och Klass(Entity)
@@ -96,20 +104,21 @@ public class GenericRepository<T> where T : class, new()
             CommandType = CommandType.Text,
         };
 
-        getEntityParameters.Invoke(command, id);
+        getEntityParameters.Invoke(command, id); // Här kallar vi på delegaten/metoden
 
         using SqlDataReader reader = command.ExecuteReader();
 
         if (reader.Read())
         {
-            result = mapToEntity.Invoke(reader);
+            result = mapToEntity.Invoke(reader); // Här kallar vi på delegaten/metoden
         }
 
         return result;
 
     }
+    #endregion
 
-
+    #region UPDATE
     /// <summary>
     /// Öppnar connection till Tellus DB och uppdaterar en specifik post utifrån angiven Klass(entity) via Stored Procedure
     /// </summary>
@@ -126,14 +135,16 @@ public class GenericRepository<T> where T : class, new()
             CommandType = CommandType.StoredProcedure
         };
 
-        updateParameters.Invoke(command, entity);
+        updateParameters.Invoke(command, entity); // Här kallar vi på delegaten/metoden
 
         command.ExecuteNonQuery();
 
-        handleOutPut?.Invoke(command, entity);
+        handleOutPut?.Invoke(command, entity); // Här kallar vi på delegaten/metoden
 
     }
+    #endregion
 
+    #region DELETE
     /// <summary>
     /// Öppnar connection till Tellus DB och deletar en specifik post utifrån angiven Klass(entity) och ID, via Stored Procedure.
     /// </summary>
@@ -150,9 +161,9 @@ public class GenericRepository<T> where T : class, new()
             CommandType = CommandType.StoredProcedure
         };
 
-        getEntityParameters.Invoke(command, id);
+        getEntityParameters.Invoke(command, id); // Här kallar vi på delegaten/metoden
 
         command.ExecuteNonQuery();
     }
-
+    #endregion
 }

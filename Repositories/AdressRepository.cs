@@ -10,6 +10,7 @@ public class AdressRepository
 {
     private readonly string _connectionString;
     private readonly GenericRepository<Adress> _genericRepo;
+
     /// <summary>
     /// Constructorn tar in connectionstring och instansierar en ny GenericRepository för Adress klassen.
     /// </summary>
@@ -20,7 +21,7 @@ public class AdressRepository
         _genericRepo = new GenericRepository<Adress>(_connectionString);
     }
 
-    #region CREATE Metoder
+    #region CREATE
     /// <summary>
     /// Tar in parametrar för Add(CREATE) Metoden
     /// </summary>
@@ -55,7 +56,8 @@ public class AdressRepository
         _genericRepo.AddEntity(adress, AddAdressParameters, HandleOutPutAdress, "AddAdress");
     }
     #endregion
-    #region READ Metoder
+
+    #region READ
     /// <summary>
     /// Tar in parametrar (ID) för Get(READ) metoden
     /// </summary>
@@ -99,7 +101,7 @@ public class AdressRepository
     }
     #endregion
 
-    #region UPDATE Metoder
+    #region UPDATE
     /// <summary>
     /// Tar in parametrar som skall uppdateras i UpdateAdress metoden.
     /// </summary>
@@ -123,7 +125,8 @@ public class AdressRepository
         _genericRepo.Update(adress, UpdateAdressParameters, null, "UpdateAdress");
     }
     #endregion
-    #region DELETE Metod
+
+    #region DELETE
     /// <summary>
     /// Deletar en specifik Adress post i Tellus DB utifrån ID, genom GenericRepository och via Stored Procedure "CascadeDeleteAdress"
     /// </summary>

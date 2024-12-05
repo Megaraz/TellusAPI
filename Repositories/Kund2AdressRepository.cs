@@ -9,17 +9,21 @@ using Microsoft.Data.SqlClient;
 
 namespace Repositories;
 /// <summary>
-/// Klass som innehåller service logiken(CRUD) specifikt för Kund2Adresser
+/// Klass som innehåller service logiken(CRUD) specifikt för Kund2Adresser, använde inte Generic Repo för X2X junction tabellerna.
 /// </summary>
 public class Kund2AdressRepository
 {
     private readonly string _connectionString;
 
-
+    /// <summary>
+    /// Constructorn tar in connectionstring och tilldelar det privata fältet
+    /// </summary>
+    /// <param name="connectionString"></param>
     public Kund2AdressRepository(string connectionString)
     {
         _connectionString = connectionString;
     }
+
     #region CREATE
     /// <summary>
     /// Lägger till en post i tabellen Kund2Adress via StoredProcedure och därmed kopplar ihop en Kund med en Adress
@@ -64,7 +68,7 @@ public class Kund2AdressRepository
     /// Hämtar alla adresser kopplade till angivet KundID
     /// </summary>
     /// <param name="kunderID"></param>
-    /// <returns></returns>
+    /// <returns>en lista av Kund2Adress</returns>
     public List<Kund2Adress> GetAdresserByKundID(int kunderID)
     {
 
@@ -122,7 +126,7 @@ public class Kund2AdressRepository
     /// Hämtar alla kunder kopplade till angivet AdressID
     /// </summary>
     /// <param name="adressID"></param>
-    /// <returns></returns>
+    /// <returns>en lista av Kund2Adress</returns>
     public List<Kund2Adress> GetKunderByAdressID(int adressID)
     {
         List<Kund2Adress> kund2Adresser = new List<Kund2Adress>();
