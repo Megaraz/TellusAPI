@@ -10,6 +10,7 @@ public class ProduktRepository
 {
     private readonly string _connectionString;
     private GenericRepository<Produkt> _genericRepo;
+
     /// <summary>
     /// Constructorn tar in connectionstring och instansierar en ny GenericRepository för Produkt klassen.
     /// </summary>
@@ -20,7 +21,7 @@ public class ProduktRepository
         _genericRepo = new GenericRepository<Produkt>(_connectionString);
     }
 
-    #region CREATE Metoder
+    #region CREATE
     /// <summary>
     /// Tar in parametrar för Add(CREATE) Metoden
     /// </summary>
@@ -56,7 +57,7 @@ public class ProduktRepository
     }
     #endregion
 
-    #region READ Metoder
+    #region READ
     /// <summary>
     /// Tar in parametrar (ID) för Get(READ) metoden
     /// </summary>
@@ -100,7 +101,7 @@ public class ProduktRepository
     }
     #endregion
 
-    #region UPDATE Metoder
+    #region UPDATE
     /// <summary>
     /// Tar in parametrar som skall uppdateras i UpdateProdukt metoden.
     /// </summary>
@@ -124,7 +125,7 @@ public class ProduktRepository
     }
     #endregion
 
-    #region DELETE Metod
+    #region DELETE
     /// <summary>
     /// Deletar en specifik Produkt post i Tellus DB utifrån ID, genom GenericRepository och via Stored Procedure "CascadeDeleteProdukt"
     /// </summary>
