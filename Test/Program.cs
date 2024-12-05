@@ -79,35 +79,35 @@ internal class Program
 
         #region KUND2ADRESS CRUD TESTER
 
-        Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
+        //Kund2AdressRepository kund2AdressRepository = new Kund2AdressRepository(connectionString);
 
-        Kund2Adress kund2Adress = new Kund2Adress()
-        {
-            ID = 1,
-            KundID = 1002, // Existerande KundID
-            AdressID = 4   // Existerande AdressID
-        };
+        //Kund2Adress kund2Adress = new Kund2Adress()
+        //{
+        //    ID = 1,
+        //    KundID = 1002, // Existerande KundID
+        //    AdressID = 5   // Existerande AdressID
+        //};
 
 
-        // (CREATE) Test för att lägga till en relation mellan Kund och Adress, fyll i fält ovanför.
-        TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
+        //// (CREATE) Test för att lägga till en relation mellan Kund och Adress, fyll i fält ovanför.
+        //TEST_KUND2ADRESS.AddKund2Adress(kund2AdressRepository, kund2Adress);
 
 
         //// (READ) Test för att hämta adresser kopplade till en kund
-        // TEST_KUND2ADRESS.GetAdresserByKundID(kund2AdressRepository, 1001);
+        //TEST_KUND2ADRESS.GetAdresserByKundID(kund2AdressRepository, 1001);
 
 
         //// (READ) Test för att hämta kunder kopplade till en adress
-        // TEST_KUND2ADRESS.GetKunderByAdressID(kund2AdressRepository, 1);
+        //TEST_KUND2ADRESS.GetKunderByAdressID(kund2AdressRepository, 1);
 
 
         //// (UPDATE) Test för att uppdatera en relation mellan Kund och Adress
-        // kund2Adress.AdressID = 2; // Exempel på ny AdressID
-        // TEST_KUND2ADRESS.UpdateKund2Adress(kund2AdressRepository, kund2Adress);
+        //kund2Adress.AdressID = 2; // Exempel på ny AdressID
+        //TEST_KUND2ADRESS.UpdateKund2Adress(kund2AdressRepository, kund2Adress);
 
 
         //// (DELETE) Test för att ta bort en relation mellan Kund och Adress
-        // TEST_KUND2ADRESS.DeleteKund2Adress(kund2AdressRepository, 1);
+        //TEST_KUND2ADRESS.DeleteKund2Adress(kund2AdressRepository, 1);
 
         #endregion
 
@@ -118,7 +118,7 @@ internal class Program
         //{
         //    Gatuadress = "Krokgatan 5 C",
         //    Ort = "Kungälv",
-        //    Postnr = "459 32",
+        //    Postnr = "459 35",
         //    LghNummer = null,
         //    ID = 11
         //};
@@ -146,7 +146,7 @@ internal class Program
         //Kontaktuppgift kontaktuppgift = new Kontaktuppgift()
         //{
         //    Kontakttyp = "E-post",
-        //    Kontaktvärde = "blabla@example.com",
+        //    Kontaktvärde = "blablabla@example.com",
         //    ID = 5
         //};
 
@@ -172,13 +172,13 @@ internal class Program
         //OrderRepository orderRepository = new OrderRepository(connectionString);
         //Order order = new Order()
         //{
-        //    ÄrSkickad = false,
+        //    ÄrSkickad = true,
         //    ÄrLevererad = false,
         //    ÄrBetald = true,
         //    Betalsystem = "Kort",
         //    TidVidBeställning = DateTime.Now,
         //    BeräknadLeverans = DateTime.Now.AddDays(5),
-        //    Kund2KontaktID = 1,
+        //    KundID = 1001, // Ett existerande KundID
         //    ID = 5
 
         //};

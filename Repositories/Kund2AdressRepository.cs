@@ -46,7 +46,15 @@ public class Kund2AdressRepository
 
         command.ExecuteNonQuery();
 
+        // Tilldelar ID värdet
         kund2Adress.ID = (int)command.Parameters["@ID"].Value;
+
+        KundRepository kundRepo = new KundRepository(_connectionString);
+        AdressRepository adressRepo = new AdressRepository(_connectionString);
+
+        // Hämta relaterade data och tilldela
+        kund2Adress.Kund = kundRepo.GetKundByID(kund2Adress.KundID);
+        kund2Adress.Adress = adressRepo.GetAdressByID(kund2Adress.AdressID);
 
     }
     #endregion
@@ -189,6 +197,13 @@ public class Kund2AdressRepository
         command.Parameters.Add("@AdressID", SqlDbType.Int).Value = kund2Adress.AdressID;
 
         command.ExecuteNonQuery();
+
+        KundRepository kundRepo = new KundRepository(_connectionString);
+        AdressRepository adressRepo = new AdressRepository(_connectionString);
+
+        // Hämta relaterade data och tilldela
+        kund2Adress.Kund = kundRepo.GetKundByID(kund2Adress.KundID);
+        kund2Adress.Adress = adressRepo.GetAdressByID(kund2Adress.AdressID);
     }
     #endregion
 

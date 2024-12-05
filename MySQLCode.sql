@@ -222,3 +222,9 @@ exec GetKunderByAdressID @AdressID = 1
 select * from Kunder
 
 select * from Kund2Kontakt
+
+select * from Adresser
+
+select * from Kontaktuppgifter
+
+select * from [Order]

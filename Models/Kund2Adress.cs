@@ -16,9 +16,9 @@ public class Kund2Adress
 
     public override string ToString()
     {
-        return $"ID: {ID}, KundID: {KundID}, AdressID: {AdressID}, " +
-               $"\nKund: {(Kund != null ? $"{Kund.Förnamn} {Kund.Efternamn}" : "Ingen Kund")}, " +
-               $"\nAdress: {(Adress != null ? $"{Adress.Gatuadress}, {Adress.Ort}" : "Ingen Adress")}";
+        return $"ID: {ID}, KundID: {KundID}, AdressID: {AdressID} " +
+               $"\nKund: {(Kund != null ? $"{Kund}" : "Ingen Kund")} " +
+               $"\nAdress: {(Adress != null ? $"{Adress}\n" : "Ingen Adress")}";
     }
 
 }

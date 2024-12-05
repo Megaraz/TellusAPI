@@ -125,7 +125,7 @@ public class OrderRepository
         command.Parameters.Add("@Betalsystem", SqlDbType.NVarChar, 32).Value = order.Betalsystem ?? (object)DBNull.Value;
         command.Parameters.Add("@TidVidBeställning", SqlDbType.DateTime).Value = order.TidVidBeställning;
         command.Parameters.Add("@BeräknadLeverans", SqlDbType.DateTime).Value = order.BeräknadLeverans;
-        command.Parameters.Add("@Kund2KontaktID", SqlDbType.Int).Value = order.KundID;
+        command.Parameters.Add("@KundID", SqlDbType.Int).Value = order.KundID;
 
         // Output-parameter
         command.Parameters.Add("@Ordernr", SqlDbType.Int).Direction = ParameterDirection.Output;

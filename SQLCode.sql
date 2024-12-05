@@ -543,6 +543,7 @@ create procedure GetAdresserByKundID
 as
     begin
         select
+            k2a.ID,
             k2a.KundID,
             k.Personnr, k.Förnamn, k.Efternamn,
             k2a.AdressID,
@@ -567,6 +568,7 @@ create procedure GetKunderByAdressID
 as
 begin
     select
+            k2a.ID,
             k2a.KundID,
             k.Personnr, k.Förnamn, k.Efternamn,
             k2a.AdressID, 

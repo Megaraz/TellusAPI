@@ -24,7 +24,7 @@ static class TEST_KUND2ADRESS
         {
             foreach (Kund2Adress item in kund2Adresser)
             {
-                Console.WriteLine($"Kund: {item.Kund!.Förnamn} {item.Kund.Efternamn}, Adress: {item.Adress!.Gatuadress}, {item.Adress.Ort}");
+                Console.WriteLine($"{item}");
             }
         }
         else
@@ -41,7 +41,7 @@ static class TEST_KUND2ADRESS
         {
             foreach (Kund2Adress item in kund2Adresser)
             {
-                Console.WriteLine($"Adress: {item.Adress!.Gatuadress}, {item.Adress.Ort}, Kund: {item.Kund!.Förnamn} {item.Kund.Efternamn}");
+                Console.WriteLine($"{item}");
             }
         }
         else
@@ -66,6 +66,6 @@ static class TEST_KUND2ADRESS
     {
         kund2AdressRepository.DeleteKund2Adress(id);
 
-        Console.WriteLine($"Relationen mellan Kund och Adress med ID {id} har tagits bort.");
+        Console.WriteLine($"Relationen mellan Kund och Adress med Kund2AdressID {id} har tagits bort.");
     }
 }
