@@ -12,6 +12,10 @@ public class Kund2KontaktRepository
 {
     private readonly string _connectionString;
 
+    /// <summary>
+    /// Constructorn tar in connectionString och tilldelar det privata fältet
+    /// </summary>
+    /// <param name="connectionString"></param>
     public Kund2KontaktRepository(string connectionString)
     {
         _connectionString = connectionString;
@@ -55,7 +59,7 @@ public class Kund2KontaktRepository
 
     #region READ
     /// <summary>
-    /// Hämtar alla kontaktuppgifter kopplade till angivet KundID
+    /// Hämtar alla kontaktuppgifter kopplade till angivet KundID via StoredProcedure
     /// </summary>
     /// <param name="kundID"></param>
     /// <returns>En lista av Kund2Kontakt</returns>
@@ -107,7 +111,7 @@ public class Kund2KontaktRepository
     }
 
     /// <summary>
-    /// Hämtar alla kunder kopplade till angivet KontaktuppgiftID
+    /// Hämtar alla kunder kopplade till angivet KontaktuppgiftID via StoredProcedure
     /// </summary>
     /// <param name="kontaktuppgiftID"></param>
     /// <returns>En lista av Kund2Kontakt</returns>
@@ -158,7 +162,7 @@ public class Kund2KontaktRepository
 
     #region UPDATE
     /// <summary>
-    /// Uppdaterar en specifik relation mellan Kund och Kontaktuppgift i Kund2Kontakt-tabellen.
+    /// Uppdaterar en specifik relation mellan Kund och Kontaktuppgift i Kund2Kontakt-tabellen via StoredProcedure
     /// </summary>
     /// <param name="kund2Kontakt"></param>
     public void UpdateKund2Kontakt(Kund2Kontakt kund2Kontakt)
@@ -187,7 +191,7 @@ public class Kund2KontaktRepository
 
     #region DELETE
     /// <summary>
-    /// Tar bort en specifik relation mellan Kund och Kontaktuppgift baserat på ID
+    /// Tar bort en specifik relation mellan Kund och Kontaktuppgift baserat på ID via StoredProcedure
     /// </summary>
     /// <param name="id"></param>
     public void DeleteKund2Kontakt(int id)
