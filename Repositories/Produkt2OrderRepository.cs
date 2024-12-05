@@ -9,8 +9,9 @@ namespace Repositories;
 public class Produkt2OrderRepository
 {
     private readonly string _connectionString;
+
     /// <summary>
-    /// Construcorn tar in connectionstring
+    /// Construcorn tar in connectionstring och tilldelar det privata fältet.
     /// </summary>
     /// <param name="connectionString"></param>
     public Produkt2OrderRepository(string connectionString)
@@ -19,6 +20,10 @@ public class Produkt2OrderRepository
     }
 
     #region CREATE
+    /// <summary>
+    /// Lägger till en post i tabellen Produkt2Order via StoredProcedure och därmed kopplar ihop en Produkt med en Order
+    /// </summary>
+    /// <param name="produkt2Order"></param>
     public void AddProdukt2Order(Produkt2Order produkt2Order)
     {
         using SqlConnection connection = new SqlConnection(_connectionString);
@@ -49,6 +54,11 @@ public class Produkt2OrderRepository
     #endregion
 
     #region READ
+    /// <summary>
+    /// Hämtar alla produkter kopplade till angivet OrderID via StoredProcedure
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <returns></returns>
     public List<Produkt2Order> GetProdukterByOrderID(int orderID)
     {
         List<Produkt2Order> produkt2Orders = new List<Produkt2Order>();
@@ -97,7 +107,7 @@ public class Produkt2OrderRepository
 
     #region UPDATE
     /// <summary>
-    /// Uppdaterar en specifik relation mellan Produkt och Order i Produkt2Order-tabellen.
+    /// Uppdaterar en specifik relation mellan Produkt och Order i Produkt2Order-tabellen, via StoredProcedure
     /// </summary>
     /// <param name="produkt2Order"></param>
     public void UpdateProdukt2Order(Produkt2Order produkt2Order)
@@ -126,8 +136,11 @@ public class Produkt2OrderRepository
     }
     #endregion
 
-
     #region DELETE
+    /// <summary>
+    /// Tar bort en specifik relation mellan Produkt och Order baserat på ID via StoredProcedure
+    /// </summary>
+    /// <param name="id"></param>
     public void DeleteProdukt2Order(int id)
     {
         using SqlConnection connection = new SqlConnection(_connectionString);
