@@ -169,19 +169,19 @@ internal class Program
 
         #region ORDER TESTER
 
-        //OrderRepository orderRepository = new OrderRepository(connectionString);
-        //Order order = new Order()
-        //{
-        //    ÄrSkickad = true,
-        //    ÄrLevererad = false,
-        //    ÄrBetald = true,
-        //    Betalsystem = "Kort",
-        //    TidVidBeställning = DateTime.Now,
-        //    BeräknadLeverans = DateTime.Now.AddDays(5),
-        //    KundID = 1001, // Ett existerande KundID
-        //    ID = 5
+        OrderRepository orderRepository = new OrderRepository(connectionString);
+        Order order = new Order()
+        {
+            ÄrSkickad = true,
+            ÄrLevererad = false,
+            ÄrBetald = true,
+            Betalsystem = "Kort",
+            TidVidBeställning = DateTime.Now,
+            BeräknadLeverans = DateTime.Now.AddDays(5),
+            KundID = 1001, // Ett existerande KundID
+            ID = 5
 
-        //};
+        };
 
         //// (CREATE) Test för att lägga till ny Order
         //TEST_ORDER.AddOrder(orderRepository, order);
@@ -189,8 +189,8 @@ internal class Program
         //// (READ) Test för att hämta Order by ID
         //TEST_ORDER.GetOrderByID(orderRepository, 5);
 
-        //// (READ) Test för att hämta samtliga Ordrar
-        //TEST_ORDER.GetOrders(orderRepository);
+        // (READ) Test för att hämta samtliga Ordrar
+        TEST_ORDER.GetOrders(orderRepository);
 
         //// (UPDATE) Test för att uppdatera en Order
         //TEST_ORDER.UpdateOrder(orderRepository, order);
@@ -202,17 +202,17 @@ internal class Program
 
         #region PRODUKT2ORDER CRUD TESTER
 
-        Produkt2OrderRepository produkt2OrderRepository = new Produkt2OrderRepository(connectionString);
+        //Produkt2OrderRepository produkt2OrderRepository = new Produkt2OrderRepository(connectionString);
 
-        Produkt2Order produkt2Order = new Produkt2Order()
-        {
-            ProduktID = 1,
-            OrderID = 1,
-            Antal = 3
-        };
+        //Produkt2Order produkt2Order = new Produkt2Order()
+        //{
+        //    ProduktID = 1,
+        //    OrderID = 1,
+        //    Antal = 3
+        //};
 
-        //// (CREATE) Test för att lägga till ny relation mellan produkt och order
-        //TEST_PRODUKT2ORDER.AddProdukt2Order(produkt2OrderRepository, produkt2Order);
+        ////// (CREATE) Test för att lägga till ny relation mellan produkt och order
+        ////TEST_PRODUKT2ORDER.AddProdukt2Order(produkt2OrderRepository, produkt2Order);
 
         //// (READ) Test för att hämta produkter för en viss order
         //TEST_PRODUKT2ORDER.GetProdukterByOrderID(produkt2OrderRepository, 1);

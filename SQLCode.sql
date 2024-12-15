@@ -671,7 +671,7 @@ begin
         Produkt2Order as p2o
     join 
         Produkter as p on 
-        p2o.ProduktID = p.ID
+        p2o.ProduktID = p.ID§
     join
         [Order] as o on
         p2o.OrderID = o.ID
