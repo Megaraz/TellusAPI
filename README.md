@@ -26,16 +26,16 @@ The project does not include a GUI — the main focus is on the **backend and da
 ---
 
 ## 📂 Project Structure
-- `/SQL` → contains all scripts to create the database schema and stored procedures.  
-- `/API` → C# code with ADO.NET for database access and CRUD operations.  
+- `SQLCode.sql` → contains all scripts to create the database schema and stored procedures.  
+- `Models and Repositories` → C# code with ADO.NET for database access and CRUD operations.  
 
 ---
 
 ## 📖 How to Use
 1. Create a new database in **SQL Server**.  
-2. Run the scripts in the `/SQL` folder to generate the schema, tables, and stored procedures.  
-3. Open the `/API` project in **Visual Studio** (or similar IDE).  
-4. Update the database connection string in the configuration file if needed.  
+2. Run the scripts in the `SQLCode.sql` file to generate the schema, tables, and stored procedures.  
+3. Open the `Test` project in **Visual Studio** (or similar IDE).  
+4. Update the database connection string in Test-project if needed
 5. Run the project and interact with the API layer.  
 
 ---
